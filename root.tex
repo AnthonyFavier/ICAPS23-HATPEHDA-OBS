@@ -177,25 +177,73 @@ Robust Task Planning for Human-Aware Collaborative Robots via Theory of Mind
 % More specifically, we explain where and how Situation Assessment (SA) is inserted in the planning process. Thanks to this, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).  
 % This conceptual approach has been implemented, and some qualitative and experimental results are discussed to show \textit{its potential}.
 
-When planning for a collaborative task, sharing the plan before execution is a common practice and assumption that may be verbally costly and even restrict the human's behavior. A recent approach named HATP/EHDA lifts this assumption and plans the robot actions while estimating the future human's behavior, without constraining it.
-For a proper interaction, Theory of Mind (ToM) must be considered by the robot. Several works integrate ToM at execution time to adapt online the robot's behavior to the human. However, such intelligent reactions may not always be enough. In some scenarios, ToM should be considered at planning time to be proactive. 
-Hence, we describe a new conceptual approach that: (a) plans the robot actions to achieve a joint shared goal with a human considered as uncontrollable,
-(b) manages the human's belief distinctly to predict their behavior and adapt the robot's one accordingly,
-(c) anticipates the upcoming spatial perspective of the human to better estimate their belief. 
-More specifically, we explain where and how Situation Assessment is inserted in the planning process. And we show, thanks to this addition, how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).  
-This conceptual approach has been implemented, and some qualitative and experimental results are discussed to show \textit{its potential}.
+% anthony-v1
+% When planning for a collaborative task, sharing the plan before execution is a common practice and assumption that may be verbally costly and even restrict the human's behavior. A recent approach named HATP/EHDA lifts this assumption and plans the robot actions while estimating the future human's behavior, without constraining it.
+% For a proper interaction, Theory of Mind (ToM) must be considered by the robot. Several works integrate ToM at execution time to adapt online the robot's behavior to the human. However, such intelligent reactions may not always be enough. In some scenarios, ToM should be considered at planning time to be proactive. 
+% Hence, we describe a new conceptual approach that: (a) plans the robot actions to achieve a joint shared goal with a human considered as uncontrollable,
+% (b) manages the human's belief distinctly to predict their behavior and adapt the robot's one accordingly,
+% (c) anticipates the upcoming spatial perspective of the human to better estimate their belief. 
+% More specifically, we explain where and how Situation Assessment is inserted in the planning process. And we show, thanks to this addition, how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).  
+% This conceptual approach has been implemented, and some qualitative and experimental results are discussed to show \textit{its potential}.
 
-\textbf{*****}
+% anthony-v2
+% Theory of Mind (ToM) must be considered by the robot to interact properly with humans. Several works integrate ToM at execution time to adapt online the robot's behavior to unplanned human initiatives. However, such online approaches may not always be enough and in some scenarios ToM should be considered during offline planning for the robot to be proactive. 
+% On the other hand, when planning for a collaborative task, sharing the plan before execution is a common practice and assumption that has benefits but may be verbally costly and even restrict the human's behavior. Hence, adapting online the robot's behavior may involve replanning and sharing again the plan which can worsen the interaction quality.
+% Recent offline planners provide more latitude to humans by discarding the idea of shared plan and considering the human as \textit{uncontrollable}. Indeed, they plan only for the robot's behavior while estimating future humans' behavior.
+% Building on existing work, we describe a new offline planning approach that formalizes ToM to maintain agents' distinct beliefs 
+% (a) plans the robot actions to achieve a joint shared goal with a human considered as uncontrollable,
+% (b) manages the human's belief distinctly to predict their behavior and adapt the robot's one accordingly,
+% (c) anticipates the upcoming spatial perspective of the human to better estimate their belief. 
+% More specifically, we explain where and how Situation Assessment is inserted in the planning process. And we show, thanks to this addition, how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).  
+% This conceptual approach has been implemented, and some qualitative and experimental results are discussed to show \textit{its potential}.
 
-Considering Theory of Mind (ToM) when executing a human-robot shared plan enables a robot to adapt its behavior online. Recent work proposes online replanning while tracking the progress of the task execution from both its own and humans' perspectives. 
-If it finds a new plan, it communicates with the humans their part and other essential task details, and it starts to execute its own part. 
-In this scenario, ToM is used to handle uncertainties caused mainly due to humans' \textit{unplanned} initiatives at run time, for example, their temporary absence or inattention, which prohibit humans to entail knowledge about the exact execution status. 
-However, plan sharing can be costly, and committing every time to a new plan can be restrictive to humans or sometimes it may not be possible. Contemporary solvers lift the requirement of shared planning such that they only plan for the robot's behavior considering humans as uncontrollable agents and hence only anticipate their decisions and actions. Such estimation leads to an implicitly coordinated human-robot joint plan given a (shared) goal. 
-In this paper, building on an existing approach, we describe a new planning system that uses ToM to maintain human's-robot's individual mental models while anticipating humans' future initiatives (more precisely, their spatial perspective). 
-% for managing their mental models. 
-In particular, we formalize a simple version of the situation assessment (SA) with perspective-taking, and use it in our new planning approach, i.e., propose where and how SA is inserted in the planning process. 
-As a result, the solver produces more \textit{robust} robot plans while estimating the human mental state, encouraging the robot to communicate about relevant humans' false beliefs, but only minimally. 
-We implement our new planning approach, prove its soundness and completeness, show its effectiveness qualitatively, and discuss experimental results on three novel benchmark domains. 
+% anthony-v3
+% It has been established that it is beneficial to endow a robot with the ability to plan for both itself and the human it collaborates with. Such capability can be considered as using Theory of Mind (ToM).
+% % Collaborative robots must consider Theory of Mind (ToM) to interact properly with humans. 
+% Several works integrate ToM at execution time to adapt online the robot's behavior to unplanned human initiatives. 
+% However, already considering ToM during offline planning may offer smarter and proactive alternatives to the robot.
+% % Recent offline planners provide more latitude to humans by considering them as \textit{uncontrollable} and discarding the idea of shared plan. Indeed, they plan only for the robot's behavior which is implicitly coordinated with the estimated non-deterministic human's behavior.
+% A recent scheme (HATP/EHDA) explicitly models humans as non-controllage agents and aims to only plan for the robot's behavior which is implicitly coordinated with the estimated non-deterministic human's behavior.
+% In this paper, we propose a contribution which will allow a better offline estimation and exploitation of the human's mental state. 
+% Some Situation Assessment (SA) processes are modeled and inserted in the planning process, distinctly for each agent.  
+% These models are based on the \textit{co-presence} and two types of action effects, (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at anytime. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).
+% % This conceptual approach has been implemented, proved to be sound and complete, and some qualitative and experimental results are discussed on three novel scenarios to show \textit{its potential}.
+% We implement our new conceptual approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains.
+
+% anthony-v4
+It is essential for collaborative robots to consider Theory of Mind (ToM) when interacting with humans.
+Several works integrate ToM when executing collaborative plans to adapt online the robot's behavior to unplanned human initiatives. 
+However, having such considerations during offline planning may offer smarter and more proactive alternatives to the robot.
+Recent offline planning schemes like HATP/EHDA explicitly model humans as \textit{uncontrollable} agents and aim to plan for robot's actions while \textit{implicitly} coordinating them with the estimated non-deterministic human's behavior. These schemes are suitable for and would benefit from the integration of some ToM concepts to better anticipate the human's behavior.
+Hence, based on such existing scheme, we propose a contribution that will allow a better offline estimation and exploitation of the human's mental state. 
+Some Situation Assessment processes are modeled and inserted in the planning process, distinctly for each agent.  
+These models are based on \textit{co-presence} and two types of action effects: (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at any time. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay/postpone robot actions).
+We implement our new conceptual approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains.
+
+% \textbf{*****}
+
+% shashank-v1
+% Considering Theory of Mind (ToM) when executing a human-robot shared plan enables a robot to adapt its behavior online. Recent work addresses an online replanning approach while tracking the progress of the execution of the overall task from both its own and humans' perspectives. 
+% If it finds a new plan, it communicates with the humans their part and other essential task details, and continue to execute its part. 
+% Here, ToM is used to handle uncertainties caused mainly due to humans' \textit{unplanned} initiatives at run time, for example, their temporary absence or distractions, which prohibit humans to entail knowledge about the exact execution status. 
+% Such online approaches are heavily dependent on plan sharing that can be costly, and committing every time to a new plan can be restrictive to humans or sometimes it may not be possible. Recent offline solvers lift the requirement of shared planning such that they only plan for the robot's behavior considering humans as an \textit{uncontrollable} agent and hence only anticipate their non-deterministic behaviours. Such estimation leads to an \textit{implicitly} coordinated joint plan given a (shared) goal. 
+% In this paper, building on an existing approach, we describe a new planning system that uses ToM to maintain human's-robot's individual mental models while anticipating humans' future initiatives (more precisely, their spatial perspective). 
+% % for managing their mental models. 
+% In particular, we formalize a simple version of the situation assessment (SA) with perspective-taking and use it in our new planning approach; while, more precisely, proposing where and how SA is inserted in the planning process. 
+% As a result, the solver produces more \textit{robust} robot plans while estimating the human mental state, encouraging the robot to communicate about relevant humans' false beliefs, but only minimally and in a principled way. 
+% We implement our new planning approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results in three novel scenarios. 
+
+% shashank-v2
+% Considering Theory of Mind (ToM) when executing a shared plan enables a robot to adapt its behavior online. Recent work on online execution and replanning tracks the progress of the overall task from both humans' and robots' perspectives. 
+% Every time the human part of the new plan is communicated along with other essential task details, and the execution continues. 
+% Here, ToM is used to handle uncertainties caused mainly due to humans' \textit{unplanned} initiatives at run time, e.g., their temporary absence or distractions, which prohibit humans from entailing knowledge about the exact execution status. 
+% Online approaches are dependent on plan sharing, which can be costly, and committing every time to a new plan can be restrictive. To the contrary, recent offline solvers provide more latitude to humans by discarding the idea of shared planning while planning only for the robot's behavior. In addition, they consider humans \textit{uncontrollable} and hence only anticipate their  non-deterministic behaviors and generate \textit{implicitly} coordinated joint plans for a (non-)shared goal. 
+% % In this paper, 
+% Building on existing work, we describe a new offline planning approach that formalizes ToM to maintain agents' individual mental models, which helps anticipate humans' future initiatives (their spatial perspective via \textit{coexistence}). 
+% % for managing their mental models. 
+% In particular, we formalize a version of situation assessment (SA) with perspective-taking and use it in our new planning approach. We propose precisely where and how SA is inserted in the planning process. 
+% Our solver produces more robust and better coordinated plans while estimating the human mental state, encouraging the robot to communicate about humans' \textit{relevant} false beliefs, but only minimally and in a principled way. 
+% We implement our new planning approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel scenarios. 
 \end{abstract}
 
 \section{Introduction}

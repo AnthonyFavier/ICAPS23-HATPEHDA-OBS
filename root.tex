@@ -126,7 +126,8 @@
 % A Robot Builds Collaborative Plans
 % while Keeping Itself in Human's Shoes
 % Considering Theory of Mind in  Human-Aware Task Planning \\ for a Collaborative Robot
-Robust Task Planning for Human-Aware Collaborative Robots via Theory of Mind
+% Robust Task Planning for Human-Aware Collaborative Robots via Theory of Mind
+Will They Know? Integrating Theory of Mind \\ in Human Aware Task Planning for Collaborative Robots
 % Anticipating Human's Situation Assessment during \\ Robot Task Planning to Improve the Collaboration
 % Robust Planning for Human-Robot Joint Tasks \\ with Explicit Reasoning on Human Mental State
 %While Keeping Itself in Human's Shoes a Robot Produce Collaborative Plans 
@@ -169,13 +170,6 @@ Robust Task Planning for Human-Aware Collaborative Robots via Theory of Mind
 % The proposed approach is sound and complete and generates robust plans for more realistic and challenging problems, and it uses communication effectively,
 % i.e., without the robot giving unnecessary information that a collaborative human can observe or infer in practice.
 % NEW
-% While several works from the literature consider Theory Of Mind at execution time to adapt the robot's behavior online, we show how taking such considerations already at planning level can benefit human-robot collaboration.
-% Building on earlier work about Human-Aware Task Planning, we describe a new conceptual approach that:
-% (a) plans the robot actions to achieve a joint shared goal with a human considered as uncontrollable,
-% (b) manages the human's belief distinctly to predict their behavior and adapt the robot's one accordingly,
-% (c) anticipates the upcoming spatial perspective of the human to better estimate their belief. 
-% More specifically, we explain where and how Situation Assessment (SA) is inserted in the planning process. Thanks to this, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).  
-% This conceptual approach has been implemented, and some qualitative and experimental results are discussed to show \textit{its potential}.
 
 % anthony-v1
 % When planning for a collaborative task, sharing the plan before execution is a common practice and assumption that may be verbally costly and even restrict the human's behavior. A recent approach named HATP/EHDA lifts this assumption and plans the robot actions while estimating the future human's behavior, without constraining it.
@@ -203,22 +197,23 @@ Robust Task Planning for Human-Aware Collaborative Robots via Theory of Mind
 % Several works integrate ToM at execution time to adapt online the robot's behavior to unplanned human initiatives. 
 % However, already considering ToM during offline planning may offer smarter and proactive alternatives to the robot.
 % % Recent offline planners provide more latitude to humans by considering them as \textit{uncontrollable} and discarding the idea of shared plan. Indeed, they plan only for the robot's behavior which is implicitly coordinated with the estimated non-deterministic human's behavior.
-% A recent scheme (HATP/EHDA) explicitly models humans as non-controllage agents and aims to only plan for the robot's behavior which is implicitly coordinated with the estimated non-deterministic human's behavior.
-% In this paper, we propose a contribution which will allow a better offline estimation and exploitation of the human's mental state. 
+% A recent scheme (HATP/EHDA) explicitly models humans as non-controllable agents and aims to only plan for the robot's behavior which is implicitly coordinated with the estimated non-deterministic human's behavior.
+% Building on this existing work, we propose a contribution which will allow a better offline estimation and exploitation of the human's mental state. 
 % Some Situation Assessment (SA) processes are modeled and inserted in the planning process, distinctly for each agent.  
-% These models are based on the \textit{co-presence} and two types of action effects, (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at anytime. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay robot actions).
+% These models are based on the \textit{co-presence} and two types of action effects, (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at anytime. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay/postpone robot actions).
 % % This conceptual approach has been implemented, proved to be sound and complete, and some qualitative and experimental results are discussed on three novel scenarios to show \textit{its potential}.
 % We implement our new conceptual approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains.
 
 % anthony-v4
-It is essential for collaborative robots to consider Theory of Mind (ToM) when interacting with humans.
-Several works integrate ToM when executing collaborative plans to adapt online the robot's behavior to unplanned human initiatives. 
-However, having such considerations during offline planning may offer smarter and more proactive alternatives to the robot.
-Recent offline planning schemes like HATP/EHDA explicitly model humans as \textit{uncontrollable} agents and aim to plan for robot's actions while \textit{implicitly} coordinating them with the estimated non-deterministic human's behavior. These schemes are suitable for and would benefit from the integration of some ToM concepts to better anticipate the human's behavior.
-Hence, based on such existing scheme, we propose a contribution that will allow a better offline estimation and exploitation of the human's mental state. 
-Some Situation Assessment processes are modeled and inserted in the planning process, distinctly for each agent.  
-These models are based on \textit{co-presence} and two types of action effects: (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at any time. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs can be detected and avoided by different means (communication or delay/postpone robot actions).
-We implement our new conceptual approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains.
+It is essential for a collaborative robot to consider Theory of Mind (ToM) when interacting with humans. Several works integrate ToM when executing joint plans to adapt online the robot's behavior to unplanned human initiatives. 
+However, having such considerations while planning offline for the robot by taking humans' behaviors into account; can offer it smarter and more proactive alternatives.
+Recent offline planning schemes like HATP/EHDA explicitly model humans as \textit{uncontrollable} agents and aim to plan for robot's actions while coordinating them \textit{implicitly} with the estimated human's behaviors. These schemes are suitable for and would benefit from integrating ToM concepts in a principled way to anticipate human behavior better.
+In this paper, based on an existing scheme, we propose a new contribution --- an offline planning approach allowing for better estimation and exploitation of the human's mental state. 
+More precisely, our approach formalizes for each agent simple yet elegant situation assessment models, which are managed at the symbolic level and inserted in the planning process. They are based on the notion of {\em co-presence}
+% Some Situation Assessment processes are modeled and inserted in the planning process, distinctly for each agent. These models are based on \textit{co-presence} 
+and two types of action effects: (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at any time. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs are detected and can be avoided by different means (communication or delayed robot actions).
+We implemented our new conceptual approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains.
+
 
 % \textbf{*****}
 
@@ -234,69 +229,102 @@ We implement our new conceptual approach, prove its soundness and completeness, 
 % We implement our new planning approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results in three novel scenarios. 
 
 % shashank-v2
-% Considering Theory of Mind (ToM) when executing a shared plan enables a robot to adapt its behavior online. Recent work on online execution and replanning tracks the progress of the overall task from both humans' and robots' perspectives. 
-% Every time the human part of the new plan is communicated along with other essential task details, and the execution continues. 
-% Here, ToM is used to handle uncertainties caused mainly due to humans' \textit{unplanned} initiatives at run time, e.g., their temporary absence or distractions, which prohibit humans from entailing knowledge about the exact execution status. 
-% Online approaches are dependent on plan sharing, which can be costly, and committing every time to a new plan can be restrictive. To the contrary, recent offline solvers provide more latitude to humans by discarding the idea of shared planning while planning only for the robot's behavior. In addition, they consider humans \textit{uncontrollable} and hence only anticipate their  non-deterministic behaviors and generate \textit{implicitly} coordinated joint plans for a (non-)shared goal. 
-% % In this paper, 
-% Building on existing work, we describe a new offline planning approach that formalizes ToM to maintain agents' individual mental models, which helps anticipate humans' future initiatives (their spatial perspective via \textit{coexistence}). 
+% It has been established that endowing a robot with the ability to reason and plan in the presence of collaborative humans is beneficial as it allows the robot to elaborate more pertinent shared plans. And Theory of Mind (ToM) is essential when executing such a plan to enable a robot to adapt its behavior online.
+% It is used to handle uncertainties caused mainly due to humans' unplanned run-time initiatives.
+% % , e.g., their temporary absence or distractions, which prohibit humans from entailing the exact execution status. 
+% Recent work on online replanning tracks the progress of the task execution from both humans' and robots' perspectives. 
+% Once replanning succeeds, the human part of the new plan is shared along with other essential task details to continue. However, frequent sharing can be costly and restrictive process for humans.     
+% % Online approaches are dependent on plan sharing, which can be costly, and committing every time to a new plan can be restrictive. 
+% To the contrary, recent offline solvers like HATP/EHDA provide more latitude to humans by discarding the idea of shared planning as they plan only for the robot's behavior. But, in addition, they consider humans \textit{uncontrollable} and hence anticipate their non-deterministic behaviors and generate \textit{implicitly} coordinated joint plans for a (non-)shared goal. 
+% In this paper, we describe a new offline planning approach based on HATP/EHDA, which formalizes ToM to maintain agents' individual mental models, helping better anticipate humans' future initiatives.
+% % (their spatial perspective via \textit{coexistence}). 
 % % for managing their mental models. 
-% In particular, we formalize a version of situation assessment (SA) with perspective-taking and use it in our new planning approach. We propose precisely where and how SA is inserted in the planning process. 
-% Our solver produces more robust and better coordinated plans while estimating the human mental state, encouraging the robot to communicate about humans' \textit{relevant} false beliefs, but only minimally and in a principled way. 
+% In particular, we formalize a \textit{version} of situation assessment (SA) process that is based on co-presence and managed at symbolic level.
+% % , and use SA in our new planning approach. 
+% We then propose precisely where and how SA can be inserted and utilized in planning. As a result, our solver produces better coordinated plans, while estimating the human mental state encourages the robot to communicate to correct humans' false beliefs, but only minimally and in a principled way. 
 % We implement our new planning approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel scenarios. 
 \end{abstract}
 
 \section{Introduction}
 % With the increasing penetration of sensor networks, advancements in robotic technology, the Internet of Things (IoT), etc., multi-robot systems are becoming ubiquitous, and the complexity of the tasks these autonomous robots can handle individually or together as a team is constantly increasing.
 % However, robots collaborating and (or) interacting with humans, for example, a robot hands-over, a robot achieving a joint task with the help of a human or receiving some routine help from a human, etc., is seldom seen in our day-to-day life, but will soon become ubiquitous, too.   
+Human-Robot Collaboration (HRC) is a current research focus due to the growing number of robot-assisted applications~\cite{kragic2021effective,selvaggio2021autonomy}. Collaborative robots add clear value to manufacturing by promising to boost productivity and improve working conditions~\cite{johannsmeier2016hierarchical}. In assembly lines, there is a strong economic advantage to allowing robots and humans to collaborate~\cite{nikolaidis2012human,coupete2015gesture}. Therefore, a certain amount of autonomy from the robot's side is quite beneficial with respect to the collaboration's efficiency and efficacy.  
+However, integrating collaborative robots in human workplaces is non-trivial and primarily raises two types of research challenges: (1) perceiving human behavior and predicting their intended goals/tasks \cite{cheng2020towards,cheng2019human}, and (2) planning for the robot's behavior while also considering humans' behavior, which is also broadly known as human-aware decision making and planning~\cite{CirilloKS09a,alami2006toward,CirilloKS09,de2015hatp,CramerKD21,unhelkar2020decision}, and negotiating for role allocation~\cite{roncone2017transparent}. 
+In this paper we focus on the latter challenge, and in particular, human aware interaction planning for a subclass of human-robot collaborative tasks, namely sequential tasks with known joint task objectives~\cite{cheng2021human,UnhelkarLS19,buisan:hal-03684211}, which can be applied in various domains like assembly line~\cite{unhelkar2018human}, in supporting human surgeons~\cite{jacob2013collaboration}, and astronauts~\cite{diftler2011robonaut}. 
 
-Consider a scenario where you (the \textit{human} agent) want to prepare, together with a robot, some pasta in your kitchen. This joint task comprises several components and activities, e.g., pasta packets are kept either in the kitchen or the living room, salt, covering a pot (or a pan), turning a furnace on, adding salt to the pasta, etc. 
+For a seamless human-robot collaboration, it is essential to integrate a task planning framework~\cite{lallement2018hatp} and/or a behavior scheduling framework~\cite{ferreira2021scheduling} and an online joint behavior execution scheme. In~\cite{PupaS21}, updated planning information is dynamically integrated into the scheduling framework, while Devin and Alami~(\citeyear{devin2016implemented}) (henceforth, DA) propose to consider ToM when interacting with humans to react to their \textit{unplanned} run-time initiatives,
+% . 
+% The DA's  framework adapts online the robot's behavior to \textit{unplanned} human initiatives, 
+e.g., their temporary absence or inattention, which prohibit humans from entailing the exact execution status. 
+However, replanning frameworks generally come with a supervisor as in~\cite{johannsmeier2016hierarchical} or DA's, which
+reduces flexibility and makes humans more
+stressed as, roughly speaking, the robot routinely communicates by asking or requesting new information like new ground truths, refined plans, etc.
+% The framework's supervisor keeps an eye on the progress of the execution from both humans' and robots' perspectives using ToM. If replanning succeeds, the human part of the new plan is shared along with other essential task details to continue. 
+
+Recently proposed planning frameworks as in~\cite{buisan:hal-03684211,UnhelkarLS19} provide more flexibility to the human. These offline approaches accept as input one or more of HR knowledge, human actions and their hidden intentions, environment states, task models, shared goals, etc. 
+They generate robot's plans that are implicitly coordinated with estimated human behaviors while considering humans as {\em uncontrollable} agents, unlike the frameworks producing joint plans, coordinated (almost) explicitly~\cite{alami2006toward,lallement2018hatp,roncone2017transparent}.  
+
+One straightforward idea could be to devise a new mechanism that somehow adapts one such (flexible) scheme in the DA's execution framework. However, in this work we propose to \textit{estimate} humans' predictable ``execution-time'' initiatives in \textit{offline planning}. And for that, we formalize a simple yet elegant version of Theory of Mind, and we implement it within the planning process of the HATP/EHDA framework~\cite{buisan:hal-03684211} --- which extends HATP~\cite{alami2006toward,lallement2018hatp}. We claim that doing so offers a collaborative robot more cleaver and proactive alternatives to coordinate and interact with humans.
+Our approach formalizes situation assessment (SA) models for participating agents, which are essentially based on ideas of perspective shifts in epistemic multi-agent planning~\cite{engesser2017cooperative}. 
+The models are based on the notion of {\em co-presence} and two types of action \textit{effects}, which are: (1) facts that are inferred by an agent while performing an action, or observing an action being executed by another agent, and (2) facts that can be observed by an agent at any time.
+We note that agents' SA models are \textit{managed} at the symbolic level and \textit{inserted} into the HATP/EHDA's planning process to be conceptualized.
+
+Integrating ToM in planning allows for estimating ambiguous situations caused due to estimated \textit{false} human beliefs such that they are detected and avoided through different means. 
+For example: (1) the robot communicates with the human to correct their false belief, and (2) the robot delays its actions on purpose. We thoroughly study the former case and show that our approach captures the evolution of individual agents' beliefs and estimates belief divergences that arise in practice. It then decides if and when belief alignment is needed and achieves it by communicating with humans, but only minimally and in a principled way. To add a different flavor, for the latter case, we provide a pilot study in \textit{appendix} and intend to investigate in the future.   
+
+We implement this novel concept for HR collaborative planning, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains. Benchmarks (details), code, and a document detailing the background, related work, and more results are provided.
+
+
+\section{Motivating Example}
+Assume that you (the human agent) want to prepare pasta in your kitchen and want to involve your robot to assist you. This joint task comprises several components and actions needed, e.g., pasta is kept either in the kitchen or the living room, covering a pot, turning a furnace on, the salt container, adding salt to the pasta, etc. 
 Sometimes, some components needed for pasta preparation might be accessible only to you (the robot) from your (its) current position, while some are accessible to both. 
-Like this subclass of collaborative tasks, its multiple instantiations exist across many real-world domains, e.g., homes, offices, hospitals, etc.
 
-Naturally, you would want to work with the robot without being bothered too much; or being lazy to do something, assuming the robot will do it instead, even if it takes longer to achieve the task. Here, we consider the human agent cooperative and rational but cannot be administered like an artificial agent, a fully controllable agent. 
-So, if they have several ways to achieve a goal or accomplish a task, the robot cannot dictate to them the one to choose. However, it can still act to influence their choices, thus eliciting future actions. 
+The literature shows that task knowledge can be gathered \textit{offline} from human psychologists and expert engineers~\cite{levine2014concurrent,wang2018robot,CirilloKS09a}; or can be learned via human tutors or from demonstrations~\cite{koppula2016anticipatory}; or a Markov model for sequential decision making can also be learned from partial specification of human behaviors~\cite{unhelkar2019learning}. 
 
+Suppose the robot has your behavioural model and assumes that you are cooperative, conforming, and rationale for the joint goal but at the same time you cannot be administered like an artificial agent --- a fully controllable agent. 
+So, if you have several ways to achieve a goal or accomplish a task, the robot cannot dictate one but estimate it non-deterministically. However, it can still act to influence your choices, thus eliciting future actions. Naturally, you would want to work with the robot without being bothered too much; or being lazy to do something, assuming the robot will do it instead, even if it takes longer to achieve the task. 
+
+% Here, we 
 %Even 
 % The above example outlines a crucial aspect of human-robot collaboration: 
-In such scenarios, the robot not only plans for agents' joint tasks but also predicts and emulates human decisions, actions, and reactions to achieve joint tasks seamlessly. 
-Anticipating human decisions based on an accurate estimation of their mental state opens the possibility for creating circumstances to promote actions to be performed by them, achieve the joint task or prevent humans from making errors based on their not up to date or inaccurate beliefs.
-Human Aware Task Planning (HATP) is a framework concerning human-robot collaboration, based on human task modeling and human-aware planning, (partially) tackles these important issues~\cite{alami2006toward,alili2009planning,de2015hatp,lallement2018hatp}.
-A more elaborated architecture, the ``first'' of its type, called HATP/EHDA, extends existing HATP and better \textbf{e}mulates \textbf{h}uman \textbf{d}ecisions and \textbf{a}ctions was recently proposed and showed an improved performance~\cite{BuisanA21,buisan:hal-03684211}.
-This new scheme raises interesting, non-trivial questions. Principled answers to them will improve the proposed HATP/EHDA framework toward task-level autonomy for human-robot collaboration.
+% In such scenarios, the robot not only plans for agents' joint tasks but also predicts and emulates human decisions, actions, and reactions to achieve joint tasks seamlessly. 
+% Anticipating human decisions based on an accurate estimation of their mental state opens the possibility for creating circumstances to promote actions to be performed by them, achieve the joint task or prevent humans from making errors based on their not up to date or inaccurate beliefs.
+% Human Aware Task Planning (HATP) is a framework concerning human-robot collaboration, based on human task modeling and human-aware planning, (partially) tackles these important issues~\cite{alami2006toward,alili2009planning,de2015hatp,lallement2018hatp}.
+% A more elaborated architecture, the ``first'' of its type, called HATP/EHDA, extends existing HATP and better \textbf{e}mulates \textbf{h}uman \textbf{d}ecisions and \textbf{a}ctions was recently proposed and showed an improved performance~\cite{BuisanA21,buisan:hal-03684211}.
+% This new scheme raises interesting, non-trivial questions. Principled answers to them will improve the proposed HATP/EHDA framework toward task-level autonomy for human-robot collaboration.
 
 
-HATP/EHDA comprises a dual-HTNs (Hierarchical Task Networks~\cite{naubooks0014222}), a joint task specification model: 
-Considers a domain modeler available to describe dual-HTNs specifications for collaborative planning. 
-Such models describe agents'  capabilities, initial beliefs, shared tasks, world dynamics, understanding of common ground, etc. Moreover, the modeler implicitly captures hypothetical variables to represent the human mood, intentions, etc., and are non-trivial to manage. Note that both these models are with the robot and it plans for both agents. 
+% HATP/EHDA comprises a dual-HTNs (Hierarchical Task Networks~\cite{naubooks0014222}), a joint task specification model: 
+% Considers a domain modeler available to describe dual-HTNs specifications for collaborative planning. 
+% Such models describe agents'  capabilities, initial beliefs, shared tasks, world dynamics, understanding of common ground, etc. Moreover, the modeler implicitly captures hypothetical variables to represent the human mood, intentions, etc., and are non-trivial to manage. Note that both these models are with the robot and it plans for both agents. 
 % while the robot plans their joint actions based on the specification models, predicts, and emulates human actions, decisions, and reactions.    
 % HATP/EHDA is the state-of-the-art planner~\cite{buisan:hal-03684211}, 
 % Without loss of generality, it assumes that agents \textit{decide} to act (e.g., pushing a heavy box, moving, noop, idle, etc.) one after the other. 
 % We note that HATP/EHDA is an extension of the HATP framework(s) --- having 
 % Note that HATP manages only one search thread for a shared plan, resulting in two coordinated plan streams. 
 % But, 
-For planning, a two-threaded search process is proposed, generating a joint plan tree comprising agents' actions. 
-The human agent is uncontrollable, so it is not trivial to determine their ``next'' action upfront, which captures the impact of their mental state, intention,  etc.
-Therefore, for a sound execution, after every robot action: The solution tree branches on all legal ``choices'' available to the human.
+% For planning, a two-threaded search process is proposed, generating a joint plan tree comprising agents' actions. 
+% The human agent is uncontrollable, so it is not trivial to determine their ``next'' action upfront, which captures the impact of their mental state, intention,  etc.
+% Therefore, for a sound execution, after every robot action: The solution tree branches on all legal ``choices'' available to the human.
  
-However, 
+% However, 
 % being in its early stage of development, 
-HATP/EHDA's existing solver makes simplistic \textit{assumptions} during planning like an action executed by an agent would also impact the beliefs of others, i.e., considering the others are always aware of the execution and sharing the same perspective as the former. But, in reality, an agent can execute an action that influences other agents' beliefs differently under different conditions. E.g., \textit{adding} salt or \textit{switching-on} the furnace impacts the human's belief differently depending on whether the human and robot are ``co-present'' (in the kitchen) during execution, or the human assessing the furnace's status post execution.  
-Due to these limitations, the solver often generates plans less robust for real-time execution.        
+% HATP/EHDA's existing solver makes simplistic \textit{assumptions} during planning like an action executed by an agent would also impact the beliefs of others, i.e., considering the others are always aware of the execution and sharing the same perspective as the former. But, in reality, an agent can execute an action that influences other agents' beliefs differently under different conditions. E.g., \textit{adding} salt or \textit{switching-on} the furnace impacts the human's belief differently depending on whether the human and robot are ``co-present'' (in the kitchen) during execution, or the human assessing the furnace's status post execution.  
+% Due to these limitations, the solver often generates plans less robust for real-time execution.        
 
-We describe a new planning approach that uses enhanced reasoning about the human's and robot's individual beliefs and their evolution. 
-To do so, it utilizes a novel paradigm for implementing suitable ``observability'' based conventions understood during plan execution in the human-robot context based on Theory of Mind (ToM)~\cite{devin2016implemented}. 
-The idea of formalizing such conventions is inspired abstractly by existing situation assessment reasoners performing spatial reasoning and perspective taking during plan execution~\cite{flavell1992perspectives,trafton2005enabling,johnson2005perceptual,Sisbot2011SituationAF,warnier-2012,lemaignan-2017}.
+% We describe a new planning approach that uses enhanced reasoning about the human's and robot's individual beliefs and their evolution. 
+% To do so, it utilizes a novel paradigm for implementing suitable ``observability'' based conventions understood during plan execution in the human-robot context based on Theory of Mind (ToM)~\cite{devin2016implemented}. 
+% The idea of formalizing such conventions is inspired abstractly by existing situation assessment reasoners performing spatial reasoning and perspective taking during plan execution~\cite{flavell1992perspectives,trafton2005enabling,johnson2005perceptual,Sisbot2011SituationAF,warnier-2012,lemaignan-2017}.
 % 
-We provide a general description of this formalization, and to employ it in the HATP/EHDA framework, the existing dual-HTNs formalism is transformed such that the new specifications become less abstract, but enable the new solver to perform enhanced reasoning and to cater to the real-world scenarios that practically are \textit{not possible} to be handled by the existing solver, and to support 
+% We provide a general description of this formalization, and to employ it in the HATP/EHDA framework, the existing dual-HTNs formalism is transformed such that the new specifications become less abstract, but enable the new solver to perform enhanced reasoning and to cater to the real-world scenarios that practically are \textit{not possible} to be handled by the existing solver, and to support 
 % implicit and explicit 
-communication.
+% communication.
 
 % As a result, 
-Our planner reasons about individual beliefs and their divergences while supporting agents' communication (\text{i.e.}, a decision on ``what'' to convey) and allows for \textit{robust} planning with explicit communication actions utilized ``if'' and ``when'' needed to align agents' beliefs. 
-We evaluate our planner on \textit{three novel domains}, provide qualitative and quantitative analyses, and discuss its theoretical properties.   
+% Our planner reasons about individual beliefs and their divergences while supporting agents' communication (\text{i.e.}, a decision on ``what'' to convey) and allows for \textit{robust} planning with explicit communication actions utilized ``if'' and ``when'' needed to align agents' beliefs. 
+% We evaluate our planner on \textit{three novel domains}, provide qualitative and quantitative analyses, and discuss its theoretical properties.   
 
-Benchmarks (details), code, and a document detailing the background, related work, and more results are provided.
+% Benchmarks (details), code, and a document detailing the background, related work, and more results are provided.
 
 % In reality, a robot can act that \textit{influences} human's belief differently under different scenarios. For example, adding salt to the pasta or switching on the furnace (in the kitchen) would impact the human's belief state differently depending on whether the human is ``co-present'' in the kitchen at the time of action execution.   
 
@@ -334,6 +362,12 @@ Benchmarks (details), code, and a document detailing the background, related wor
 % After that, we present the results and show examples where handling the belief divergences is effective and how the current version of HATP/EHDA might miss some subtleties or even be ineffective under those scenarios. We compare the overall effectiveness of our approach and show that it uses communication when needed in the process. 
 % We conclude with a summary, discussion, and future work.
 
+****
+
+****
+
+****
+
 \section{Related Work}
 \textbf{1.} Human task modeling - issues references, what and why, other related issues
 
@@ -345,6 +379,7 @@ Benchmarks (details), code, and a document detailing the background, related wor
 
 \textbf{5} Sandra's work on ToM, add examples where that approach is not relevant   -- how sandra's approach with current hatp/ehda plans would behave differently -- fewer replanning/ reducing the dependence on external hardware at run time.
 
+6. note that we still need an execution framework like DA's for an end to end execution
 
 ****
 

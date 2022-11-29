@@ -418,11 +418,11 @@ we estimate the evolution of the agents' beliefs and decide ``if'' and ``when'' 
 but with minimal communication and in a principled way. Moreover, we do not use these actions for planning (for the deliberation process) explicitly like (non-) primitive tasks.    
 
 \paragraph{Epistemic Planning}
-Our notion of an ``observable fact,'' classified into: observable from action and observable from the state, can roughly be associated with the restricted epistemic logic presented and applied in planning applications~\cite{CooperHMMPR21}. 
-Also a part of our high-level idea is in line with the concept of perspective shifts epistemic planning based on extended DEL~\cite{engesser2017cooperative}. 
-DEL-based representation are rich and can model scenarios involving nested
-perspective-taking as  compared to our first-order representation used for maintaining agents' distinct beliefs. 
-In~\cite{KR2021-12}, this notion of prospective shifts is extended to provide a foundation for producing implicitly coordinated human-robot plans such that they do not have to negotiate about and commit to a joint policy at plan time. In our understanding, the latter produces HR policies that are not socially awkward which is essentially the aim of such research, but they do not model humans as uncontrollable.  
+Our notion of an ``observable-fact'' classified into: observable from action and observable from the state, can roughly be associated with the restricted epistemic logic presented and applied in planning applications~\cite{CooperHMMPR21}. 
+Also, a part of our high-level idea is in line with the concept of perspective shifts epistemic planning based on extended DEL~\cite{engesser2017cooperative}. 
+DEL-based representation is rich and can model scenarios involving nested perspective-taking compared to our first-order representation used for maintaining agents' distinct beliefs. 
+In~\cite{KR2021-12}, the notion of perspective shifts is extended to provide a foundation for producing implicitly coordinated human-robot plans such that they do not have to negotiate about and commit to a joint policy at plan time. 
+In our understanding, this work produces HR policies that are not socially awkward, which is essentially the aim of such research, but they do not model humans as uncontrollable agents like ours.  
 
 % \paragraph{Explainable AI Planning}
 
@@ -851,7 +851,7 @@ These retrieved actions are appended to the sender's plan.
 Most of the encountered relevant belief divergences are due to missed inferable effects. 
 % Thus, another way to avoid such ambiguity is to identify the planned robot action creating the relevant divergence and postpone it until the human is \textit{co-present} s.t. the \textit{Inference} process can applied and make the originally missed effects known by the human.
 Thus, another way to avoid such ambiguity is to postpone the planned non-observed robot action (diverging action) in order to make the originally missed effects known by the human. The corresponding process has one strong assumption s.t. the relevant divergence must come from only one inferable attribute. With this in mind, the process is the following. 
-First, the relevant divergence is solved by the communication solution to create a safe branch in the solution plan tree. After, we check if the relevant divergence was already present in the initial human belief or if it is due to a non-observed action, we proceed only in the latter case. Next, we identify the diverging action by sequentially applying the already planned actions while monitoring when the relevant inferable attribute diverges. Once identified, a new branch is created before the diverging action and "\textit{Delay}" actions are inserted in the robot's plan until the human is \textit{co-present}. Then, the diverging action is inserted and the nominal planning process is resumed.
+First, the relevant divergence is solved with communication to create a safe branch in the solution plan tree. After, we check if the relevant divergence was already present in the initial human belief or if it is due to a non-observed action, we proceed only in the latter case. Next, we identify the diverging action by sequentially applying the already planned actions while monitoring when the relevant inferable attribute diverges. Once identified, a new branch is created before the diverging action and "\textit{Delay}" actions are inserted in the robot's plan until the human is \textit{co-present}. Then, the diverging action is inserted and the nominal planning process is resumed.
 
 % Algo:
 % \begin{itemize}
@@ -880,7 +880,7 @@ First, the relevant divergence is solved by the communication solution to create
 
 % This delaying solution is only discussed qualitatively in this section because it currently has limitations compared to the communication one. Indeed, the relevant divergence must be due to only one \textit{inferable} attribute and the agents must co-present at least once after the diverging action. Thus, delaying the robot action to fix the divergence isn't always feasible. Therefore, this solution is used along with the communication solution, which is always working, and we later select the best one to use. However, this selection is based on accurate \textit{plan evaluation} which is currently lacking in the scheme and out of the scope of this paper.  
 
-To apply this delaying solution the relevant divergence must be due to only one \textit{inferable} attribute and the agents must co-present at least once after the diverging action. Thus, delaying the robot action to fix the divergence isn't always feasible. Therefore, this solution is used along with the communication solution, which is always working, and we later select the best one for the robot. However, this selection is based on accurate \textit{plan evaluation} which is currently lacking in this scheme and out of the scope of this paper.
+To apply this delaying solution the relevant divergence must be due to only one \textit{inferable} attribute and the agents must be co-present at least once after the diverging action. Thus, delaying the robot action to fix the divergence isn't always feasible. Therefore, this solution is used along with the communication solution, which is always working, and we later select the best one for the robot. However, this selection is based on accurate \textit{plan evaluation} which is currently lacking in this scheme and out of the scope of this paper.
 As a result of all these limitations this solution is only discussed qualitatively in this section and will not appear in the formal proofs and evaluations parts. 
 
 Nevertheless, this solution was worth to be mentioned and discussed because it illustrates well the possible proactive behaviors the robot could be endowed thanks to our contribution.

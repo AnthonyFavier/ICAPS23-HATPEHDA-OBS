@@ -265,8 +265,8 @@ Recently proposed planning frameworks as in~\cite{buisan:hal-03684211,UnhelkarLS
 They generate robot's plans that are implicitly coordinated with estimated human behaviors while considering humans as {\em uncontrollable} agents, unlike the frameworks producing joint plans that are coordinated (almost) explicitly~\cite{alami2006toward,lallement2018hatp,roncone2017transparent}.
 So one straightforward approach could be to have a mechanism that somehow adapts the very idea of one such flexible scheme in the DA's online framework. 
 
-In this work, we propose to estimate humans' \textit{predictable} execution-time initiatives in offline planning. And for that, we formalize a simple yet elegant version of Theory of Mind, and  integrate it with the process of the HATP/EHDA framework~\cite{buisan:hal-03684211} --- extends  HATP~\cite{lallement2018hatp,CirilloKS09}. 
-One of the main reasons to select HATP/EHDA as the basis for realizing our version of ToM is that, it uses factored task model and specifications that make the problem more compact and amenable to   reasoning, which is less likely with frameworks~\cite{unhelkar2019learning} employing flat models~\cite{levine2014concurrent,unhelkar2019learning}.
+In this work, we propose to estimate humans' \textit{predictable} execution-time initiatives in offline planning. And for that, we formalize a simple yet elegant version of Theory of Mind, and  integrate it with the process of the HATP/EHDA framework~\cite{buisan:hal-03684211} (extends  HATP~\cite{lallement2018hatp,CirilloKS09}). 
+One main reason to select HATP/EHDA as the basis for realizing our version of ToM is that, it uses factored task model and specifications that make the problem more compact and amenable to   reasoning, which is less likely with frameworks~\cite{unhelkar2019learning} employing flat models~\cite{levine2014concurrent,unhelkar2019learning}.
 We claim that our contribution can offer a collaborative robot more clever and proactive alternatives to coordinate and interact with humans.
 
 We formalize situation assessment (SA) models for participating agents. 
@@ -276,12 +276,15 @@ More specifically, we upgrade the framework's existing planning scheme to utiliz
 
 Our integration allows for estimating ambiguous situations caused due to estimated \textit{false} human beliefs such that they are detected and avoided through different means. 
 For example: (1) the robot communicates with the human to correct their false belief, and (2) the robot delays its actions on purpose. We thoroughly study the former case and show that our new planning scheme captures the evolution of individual agents' beliefs and estimates belief divergences that arise in practice. 
-It then decides if and when belief alignment is needed and achieves it by communicating with humans, but only minimally and in a principled way. To add a different flavor, for the latter case, we provide a pilot study in \textit{appendix} and intend to investigate in the future.   
+It then decides if and when belief alignment is needed and achieves it by communicating with humans, but only minimally and in a principled way. 
+% To add a different flavor, 
+For the latter case, we provide a pilot study in appendix and intend to investigate in the future.   
 
-We implement this novel concept for HR collaborative planning, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains. Benchmarks (details), code, and a document detailing the background, related work, and more results are provided. \textbf{??VERIFY THIS PARA??}
+We implement this novel concept for HR collaborative planning, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains. Benchmarks (details), code, and a document detailing the background, related work, and more results are provided. 
+\textbf{??VERIFY - what all provided??}
 
 
-\section{Motivating Example}
+\section{***Motivating Example***}
 Assume that you (the human agent) want to prepare pasta in your kitchen and want to involve your robot to assist you. This joint task comprises several components and actions needed, e.g., pasta is kept either in the kitchen or the living room, covering a pot, turning a furnace on, the salt container, adding salt to the pasta, etc. 
 Sometimes, some components needed for pasta preparation might be accessible only to you (the robot) from your (its) current position, while some are accessible to both. 
 
@@ -366,6 +369,7 @@ So, if you have several ways to achieve a goal or accomplish a task, the robot c
 % After that, we present the results and show examples where handling the belief divergences is effective and how the current version of HATP/EHDA might miss some subtleties or even be ineffective under those scenarios. We compare the overall effectiveness of our approach and show that it uses communication when needed in the process. 
 % We conclude with a summary, discussion, and future work.
 
+% \pagebreak
 \section{Related Work}
 \paragraph{Theory of Mind }
 It refers to the ability to ascribe distinct mental states to other people and update them by reasoning about their perceptions and goals~\cite{baron1985does}. 
@@ -388,7 +392,7 @@ It is capable of basic reasoning for role assignment and task allocation. Robots
 
 Research has been proposed to investigate how to create a reasonable model of human operators and how to obtain task knowledge, e.g.,~\cite{unhelkar2019learning}. 
 HR task planning is also modeled as an optimization problem and solved using multiple cutting-edge research, e.g., mixed integer programming~\cite{VatsKL22}. 
-Task knowledge can be gathered \textit{offline} from human psychologists and expert engineers~\cite{levine2014concurrent,wang2018robot,CirilloKS09}; or can be learned via human tutors or from demonstrations~\cite{koppula2016anticipatory}; or a Markov model for sequential decision making can also be learned from partial specification of human behaviors~\cite{unhelkar2019learning}. 
+Task knowledge can be gathered offline from human psychologists and expert engineers~\cite{levine2014concurrent,wang2018robot,CirilloKS09}; or can be learned via human tutors or from demonstrations~\cite{koppula2016anticipatory}; or a Markov model for sequential decision making can also be learned from partial specification of human behaviors~\cite{unhelkar2019learning}. 
 % 
 Hierarchical models consist of layered abstractions and are considered suitable or close to human intuitions. It helps predict humans' actions or plan predictable behaviors of the robot. 
 Such models can be learned using conjugate task graphs, and to identify the task structure an aggregation algorithm can be used~\cite{HayesS16}. 
@@ -418,11 +422,12 @@ we estimate the evolution of the agents' beliefs and decide ``if'' and ``when'' 
 but with minimal communication and in a principled way. Moreover, we do not use these actions for planning (for the deliberation process) explicitly like (non-) primitive tasks.    
 
 \paragraph{Epistemic Planning}
-Our notion of an ``observable-fact'' classified into: observable from action and observable from the state, can roughly be associated with the restricted epistemic logic presented and applied in planning applications~\cite{CooperHMMPR21}. 
-Also, a part of our high-level idea is in line with the concept of perspective shifts epistemic planning based on extended DEL~\cite{engesser2017cooperative}. 
-DEL-based representation is rich and can model scenarios involving nested perspective-taking compared to our first-order representation used for maintaining agents' distinct beliefs. 
-In~\cite{KR2021-12}, the notion of perspective shifts is extended to provide a foundation for producing implicitly coordinated human-robot plans such that they do not have to negotiate about and commit to a joint policy at plan time. 
-In our understanding, this work produces HR policies that are not socially awkward, which is essentially the aim of such research, but they do not model humans as uncontrollable agents like ours.  
+Our notion of the ``observable-fact'' classified into: observable from action and observable from the state, can roughly be seen as a part of the restricted epistemic logic presented and applied in planning applications~\cite{CooperHMMPR21}. 
+Our high-level idea of SA is consistent with the concept of perspective shifts in epistemic multi-agent planning -- that extends DEL~\cite{engesser2017cooperative}. 
+However, unlike our first-order representation, which is used to maintain agents' distinct beliefs, DEL-based representation is rich and can model scenarios involving nested perspective-taking.  
+In~\cite{KR2021-12}, the concept of perspective shifts is expanded to provide a foundation for producing implicitly coordinated human-robot plans that do not require the agents to negotiate and commit to a joint policy at plan time. 
+In specific scenarios, it produces HR policies that are not socially awkward, which is essentially the aim of HRI research. 
+However, the work does not consider humans as uncontrollable agents like ours, so with what we understand, extending their framework to handle that is not so clear.  
 
 % \paragraph{Explainable AI Planning}
 
@@ -581,21 +586,27 @@ Belief divergence is defined as a situation during planning when there exists an
 \end{definition} 
 
 % Note that uncertainty in individual's knowledge is not explicitly modeled, while 
-Each agent is convinced about their beliefs of the ground truth and considered trustworthy when communicating with others~\cite{fabiano2021multi}.
+We note that each agent is convinced about their beliefs of the ground truth and considered trustworthy when communicating with others~\cite{fabiano2021multi}.
 
 \section{Modeling Simple Theory of Mind}
-% We formally model run-time observability conventions, understood during plan execution, and use them for task planning in human-robot collaboration. 
-
-We formalize our intended concepts of ToM and use them for planning. Agents' SA processes are modeled at symbolic level and utilized for a better anticipation of what can happen and what the agents can know following their execution traces. To make it more precise and to simplify the exposition, we associate the models with the notion of \textit{Places}. 
+% We formalize our intended concepts of ToM and use them for planning. 
+Agents' SA processes are modeled at the symbolic level and utilized in planning for better anticipation of what can happen and what the agents can know following their estimated sequence of actions during execution. 
 % More precisely, These processes are themselves based on a symbolic Place-Based model of observability described below.
 
-\subsection{Place-Based Observability Model}
+Our main intuition behind formalizing the SA processes is that we want to \textit{exploit} --- by estimating it in a straightforward manner, the agents' real-time sensing ability (or ability to see things, in case of humans) in \textit{offline planning}. We note that they are modeled as \textit{deterministic} processes. 
+We understand that such evaluation is generally done precisely with \textit{geometric reasoners} at run-time, but it would be less intuitive to consider such reasoners while modeling SA at the symbolic level. 
+However, in line with the DA's framework, those reasoners make more sense during execution and can be used along with perception and supervision to handle robot's behaviour to \textit{non-estimated} human initiatives. 
 
-We introduce SA models to be able to evaluate the observability of the agents during the planning process. Such evaluation could be done more precisely with some geometric reasoning, but it would be very challenging to use at planning time. This type of reasoning will be done at execution time using perception and supervision to handle unplanned human initiatives. 
+\subsection{Place-Based Observability}
 
-Our symbolical place-based observability model is abstractly inspired by standard execution time observability conventions relevant for the current context~\cite{devin2016implemented}. 
+% We introduce SA models to be able to evaluate the observability of the agents during the planning process. Such evaluation could be done more precisely with some geometric reasoning, but it would be very challenging to use at planning time. 
+% This type of reasoning will be done at execution time using perception and supervision to handle unplanned human initiatives. 
 
 
+
+% The place-based observability model is abstractly inspired by standard execution time observability conventions relevant for the current context~\cite{devin2016implemented}. 
+
+To make the SA processes more precise and exposition of our intuition easier, we associate them with  \textit{Places} --- which are a particular class of objects in the environment. 
 
 \begin{definition} \label{def:places}
 \textbf{(Places.)} Represented as $\mathit{Places}$, captures a group of constant symbols such that each member individually captures a pre-specified area in an environment declared by the domain modeler.  
@@ -603,19 +614,26 @@ Our symbolical place-based observability model is abstractly inspired by standar
 
 % Agents are always ``situated'' in a place or moving between two places. Two agents situated in the same place $p \in \mathit{Places}$, at a given time, are said to be \textit{co-present}.
 
-Agents are always ``situated'' in a place or moving between two places. 
+Note that agents are always either ``situated'' in a place or moving between two places while performing a task. 
 % Agents are always ``situated'' in a place. When moving between two places, an agent is considered as situated in both places.
 
 \begin{definition} \label{def:copresence}
-\textbf{(Co-presence.)} Two agents situated in the same place $p \in \mathit{Places}$, in a given state $s_i \in \mathcal{S}$, are said to be \textit{co-present} in this state $s_i$.
+\textbf{(Co-presence.)} Two agents situated in the same place $p \in \mathit{Places}$, in a given state $s_i \in \mathcal{S}$, are said to be \textit{co-present} in $s_i$.
 \end{definition}
 
 
+% \begin{definition} \label{def:pssav}
+%     \textbf{(Place Specific State Attribute Function.)} A {\em grounded} state-variable function {\em aka} a state attribute of a given state, can  explicitly be associated with a specific place. More generally, 
+%     $f_{loc}: (f_{svs_i}(?g_1(gr_1),...,?g_k(gr_k),\mathcal{S})) \rightarrow Places$
+%     % $f_{loc}: (f_{svs_i},\mathcal{S})) \rightarrow Places \cup \emptyset$
+% \end{definition}
 \begin{definition} \label{def:pssav}
-    \textbf{(Place Specific State Attribute Function.)} A {\em grounded} state-variable function, {\em aka} a state attribute of a given state, can be explicitly associated with a place. More generally, 
-    $f_{loc}: (f_{svs_i},\mathcal{S})) \rightarrow Places \cup \emptyset / \bot$
+    \textbf{(Place Specific State Attribute Function.)} A {\em grounded} state-variable function {\em aka} a state attribute of a given state is explicitly associated with a place. More generally, 
+    % which can be expressed as, 
+    $f_{loc}: (f_{svs_i}(?g_1(gr_1),...,?g_k(gr_k),\mathcal{S})) \rightarrow Places \cup \emptyset$.
+    % \label{def:pssav}
 \end{definition}
-Here, $\mathit{loc}$ is a location specific symbol for {\em place specific attribute}, while the function captures and maintains the place associated to a state attribute $f_{svs_i}$ of a given state.
+Here, $\mathit{loc}$ is a location specific symbol for {\em place specific attribute}, while the function captures and maintains the place ($\emptyset$ appears in the definition for the omnipresent attributes also known as static attributes) associated to a state attribute $f_{svs_i}$ of a given state.
 
 
 % Such explicit mappings suggest that the attribute is effective 
@@ -624,37 +642,48 @@ Here, $\mathit{loc}$ is a location specific symbol for {\em place specific attri
 % Such mappings can change when an action changes \textit{place} of the effectiveness of an attribute, e.g., 
 % while \textit{holding} a cup the robot \textit{moves} to the adjacent room. 
 % These updates are currently manually handled, carefully.
-This explicit mappings suggest that the attribute is ``\textit{observable}" in its dedicated place.
-Such mappings can change when an action modifies the \textit{place} of observability of an attribute, e.g., 
+These explicit mappings suggest that the attribute is ``observable'' in its dedicated place. Such mappings can change when an agent's action modifies the \textit{place} of observability of an attribute, e.g., 
 while \textit{holding} a cup the robot \textit{moves} to an adjacent room. 
 These updates are currently manually handled, carefully.
 
 \begin{definition} \label{def:svof}
 \textbf{(State Variable Observability Function.)} 
-The state variable observability function maps each state attribute, {\em aka} a grounded \textit{state-variable function},
-to either $\observable$ or $\inferable$, i.e., 
-$f_{\textit{obs}}: (f_{svs_i},\mathcal{S}) \rightarrow  \{\inferable, \observable\}$.
+% (ref to Obesrvability of fluents section)}
+The state variable observability function maps each state attribute {\em aka} a grounded \textit{state-variable function} 
+to either $\observable$ or $\inferable$; or a more general way to express it is, $f_{\textit{obs}}: (f_{svs_i}(?g_1(gr_1),...,?g_k(gr_k),\mathcal{S}
+) \rightarrow 
+    \{\inferable, \observable\}$.
 \end{definition}
 Here, \textit{obs} represents an \textit{observability} symbol to capture \textit{state-variable observability} such that a state-variable function, for a legal state $s\in\mathcal{S}$, is classified as either \textit{observable} ($\observable$) or \textit{inferable} ($\inferable$). 
 We generalize it further, assuming a state-variable function is either \textit{observable} or \textit{inferable}, and hence, relaxing the individual state based restrictions, that means, the above expression can be further simplified to, 
-% $f_{\textit{obs}}: (f_{svs_i}(?g_1(gr_1),...,?g_k(gr_k))) \rightarrow \{\inferable, \observable\}$.
-$f_{\textit{obs}}: (f_{svs_i}) \rightarrow \{\inferable, \observable\}$.
+$f_{\textit{obs}}: (f_{svs_i}(?g_1(gr_1),...,?g_k(gr_k))) \rightarrow \{\inferable, \observable\}$.
+% $f_{\textit{obs}}: (f_{svs_i}) \rightarrow \{\inferable, \observable\}$.
 
 % When a state-variable function % ($f_{svs_i}$) belongs to the class $\observable$, it indicates that an agent can \textit{assess} the correct knowledge of its \textit{exact} status in a given state $s_l$, if the agent fulfils certain requirements w.r.t. the state $s_l$. 
 % But when we say a state-variable function ($f_{svs_j}$) belongs to the class $\inferable$, that means that, unlike the previous case, an agent \textit{cannot} observe it directly. But, under certain scenarios, the agent can definitely predict or infer its \textit{exact} status in $s_l$. 
-When a state-variable function ($f_{svs_i}$) belongs to the class $\observable$, it indicates that, under certain requirements, an agent can \textit{assess} its \textit{exact} value.
-On the other hand, when a state-variable function ($f_{svs_j}$) belongs to $\inferable$, it means that its value \textit{cannot} directly be observed. However, an agent can, in the right conditions, predict or infer its \textit{exact} value. 
+When a grounded state-variable function ($f_{svs_i}(...)$) belongs to the class $\observable$, an agent can \textit{assess} the correct knowledge of its \textit{exact} status in a given state $s_l$, if the agent fulfils certain requirements w.r.t. $s_l$. 
+But when we say $f_{svs_j}(...)$ belongs to the class $\inferable$, it means, unlike the previous case, an agent \textit{cannot} observe it directly. 
+However, in certain cases, the agent can definitely predict or infer its \textit{exact} status. 
 
 
-\subsection{Modeling Situation Assessment Processes}
+\subsection{Situation Assessment Processes}
+% Based on the Place-Based Observability model we just introduced, we model SA with the following two processes that will be used in the planning process/deliberation process. 
 
-Based on the Place-Based Observability model we just introduced, we model SA with the following two processes that will be used in the planning process/deliberation process. 
+We note that the robot is always aware of the ground reality. 
+Hence, technically, the following processes are only effective for the human agent in our case. 
 
-Note that the robot is always aware of the ground reality. Hence, technically, the following processes are only effective for the human agent. 
+***
+
+****
 
 \begin{definition} \label{def:obs}
-    \textbf{(Observation.)} When situated in the same place (Def.\ref{def:pssav}) as an observable (Def.\ref{def:svof}) attribute, an agent assesses its exact value.  
+    \textbf{(Observation.)} When situated in the same place (Def.~\ref{def:pssav}) as an observable (Def.~\ref{def:svof}) attribute, an agent assesses its exact value.  
 \end{definition}
+
+\begin{definition} \label{def:obs}
+    \textbf{(Observation.)} When situated in the same place (Def.~\ref{def:pssav}) as an observable (Def.~\ref{def:svof}) attribute, an agent assesses its exact value.  
+\end{definition}
+
 
 % (Based on Definition~\ref{def:pssav}) We can always associate specific state attributes to \textit{places}. 
 % For example, suppose that being in the state $s_1$, the robot switches on the furnace placed in \textit{kitchen}, and this generates a new state $s_2$. Also, assume that
@@ -733,11 +762,11 @@ To update initial observable facts with the \textit{Observation} process, first,
 
 Note that we do not yet consider cases where the robot's beliefs can diverge, too, assuming that, while not being observed, humans only make deterministic moves. Hence, regardless of the co-presence, the robot always updates its belief with both the \textit{inferable} and \textit{observable} effects.
 
-\subsection{Handling Ambiguous Situation}
+\subsection{**Handling Ambiguous Situation**}
 
 During the deliberation process, more precisely when estimating the next human actions, we check if there is an \textit{ambiguous situation} caused by estimated \textit{false} human beliefs. If so, the ambiguity is identified and then fixed. We propose two ways to fix such ambiguity. The first one, through minimal communication, is a formally proven robust and safe method. The second one, through delayed robot action, is more conceptual and less robust but illustrates well the kind of proactive behavior our contribution can provide to a robot.
 
-Be aware that although we don't explicitly model human beliefs' uncertainties, we deal with them nonetheless. Indeed, when such uncertainties arise, especially when the robot acts while the human is absent, we assume that the human would think that nothing has changed until they observe the changes. We are aware that a rational human would certainly not use such extreme reasoning, but without a absolute trust in the robot, a human would likely be unsure about the non-observed robot action effects. Due to this uncertainty the human could have unpredictable behaviors at run-time that might be superfluous or even detrimental to the joint task (e.g. trying to achieve a subtask the robot already did).
+\textbf{Be aware that although we }don't explicitly model human beliefs' uncertainties, we deal with them nonetheless. Indeed, when such uncertainties arise, especially when the robot acts while the human is absent, we assume that the human would think that nothing has changed until they observe the changes. We are aware that a rational human would certainly not use such extreme reasoning, but without a absolute trust in the robot, a human would likely be unsure about the non-observed robot action effects. Due to this uncertainty the human could have unpredictable behaviors at run-time that might be superfluous or even detrimental to the joint task (e.g. trying to achieve a subtask the robot already did).
 To improve the interaction and the execution of the joint plan, we actively seek to identify and avoid this kind of ambiguity during planning. To do this, we consider the worst scenario in which there are no uncertainties and the human isn't aware of non-observed changes (has false beliefs).
 % This is the kind of ambiguity we are trying to detect and avoid proactively during planning to improve the interaction and the execution of the joint-plan. And to do so, we consider the worst case where there is no uncertainties and the human isn't aware of non-observed changes (has false beliefs).
 
@@ -933,12 +962,11 @@ We assure it believing on the underlying mechanism and that there is at least on
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=0.99\linewidth]{figures/bc_plans.png}
-    % \includegraphics[width=0.85\linewidth]{figures/new_plans.png}
+    \includegraphics[width=0.99\linewidth]{figures/qualitative_plans.png}
     \caption{
-    Plans obtained in two scenarios: Each presents two plans. (\textit{Left}) Obtained by the old solver, and (\textit{Right}) obtained by ours. The latter depicts more realistic and appropriate belief updates (focusing on two attributes).
+    Plans obtained in two scenarios A and B: Each presents two plans. (\textit{Left}) Obtained by the \textit{existing solver}, and (\textit{Right}) obtained by ours. The latter depicts more realistic and appropriate belief updates (focusing on two attributes).
     Case~(A): the human has no certainty on {\em SaltInPot}, while ours decides to communicate to remove the ambiguity. 
-    And, Case~(B): an initial belief divergence on {\em AtPasta} induces an ``invalid'' plan, but ours predicts that the human \textit{assess} the pasta location and update their belief, without being communicated.
+    And, Case~(B): an initial belief divergence on {\em AtPasta} induces an ``invalid'' plan, but ours predicts that the human will \textit{assess} the pasta location, without being communicated.
     }
     \label{fig:scenarios}
 \end{figure}
@@ -948,17 +976,19 @@ We assure it believing on the underlying mechanism and that there is at least on
 \section{Evaluation}
 \textbf{** related work section suggests - no existing planner available to compare against -- adjust this statement here clearly***}
 
-Before we describe three {\em novel} domains used in the experiments and the results to compare the old and new approaches, let us make a ``high-level'' distinction between the two. 
-In principle, the old solver can handle a belief divergence only when agents start with unaligned, distinct beliefs. But, when it is not so, unlike ours, it assumes that the agents' beliefs never diverge during planning, and hence there is no way it can handle a divergence created by an agent in practice. 
-The old solver can align the beliefs via explicitly influencing (the human's) action model and a cumbersome technique using triggers to update their task networks. Our approach estimates the evolution of belief divergences at planning time and uses explicit communication actions to handle them in practice to generate robust plans. 
+Before we describe three {\em novel} domains used in the experiments and the results to compare the existing solver and our new approach, let us make a ``high-level'' distinction between the two. 
+% In principle, the old solver can handle a belief divergence only when agents start with unaligned, distinct beliefs. But, when it is not so, unlike ours, it assumes that the agents' beliefs never diverge during planning, and hence there is no way it can handle a divergence created by an agent in practice. 
+% The old solver can align the beliefs via explicitly influencing (the human's) action model and a cumbersome technique using triggers to update their task networks. Our approach estimates the evolution of belief divergences at planning time and uses explicit communication actions to handle them in practice to generate robust plans. 
+The existing solver, unlike our approach, assumes that the agents' beliefs never diverge during planning, and hence has no way to handle a divergence created by an agent in practice. However, in principle, cases where agents start with unaligned beliefs can be handled with the existing solver. Nonetheless, the action model of the agents must be explicitly designed to handle such divergences since they are not dealt with in the solver itself. Hence, it is through cumbersome and domain dependent modeling techniques that initial belief divergences can be handled with the existing solver.
+Our approach estimates the evolution of belief divergences during planning and handles them in a principled way with planned communication actions.
 
 \subsubsection{Cooking Pasta Domain:}
 Suppose a stove and salt are available in \textit{Kitchen} $\in$ $\textit{Places}$, and the pasta can be either in \textit{Kitchen} or \textit{Room} (the two are adjacent). The agents have different roles and can only operate in the two places. Robot \textit{adds} salt to the pot and \textit{turns-on} the stove. Human \textit{grabs} the pasta and \textit{pours} it into the pot. 
 Pasta can be poured after salt is added to the pot and the stove is {\sc on}.
-Focus on the following two attributes associated to \textit{Kitchen}: For a given state, $s_i \in \mathcal{S}$, $f_{\textit{SaltInPot}}^{s_i} \in \{\textit{true, false}\}$ and $f_{\textit{stove}}^{s_i} \in \{\textit{on, off}\}$ such that only $f_{\textit{stove}}^{s_i}$ is \textit{inferable}, all others belong to $\observable$.
+Focus on the following two attributes associated to \textit{Kitchen}: For a given state, $s_i \in \mathcal{S}$, $f_{\textit{SaltInPot}}^{s_i} \in \{\textit{true, false}\}$ and $f_{\textit{stove}}^{s_i} \in \{\textit{on, off}\}$ such that only $f_{\textit{SaltInPot}}^{s_i}$ is \textit{inferable}, all others belong to $\observable$.
 
 \subsubsection{Preparing Box Domain:}
-A box filled with a fixed number of balls with a sticker on it is considered prepared and needs to be sent. Both the agents can \textit{fill} the box with balls from a bucket, while only the robot can \textit{paste} a sticker and only the human can \textit{send} the box. The bucket can run out of balls, so when only one ball is left, the human \textit{moves} to another room to \textit{grab} more balls and \textit{refill} it. 
+A box with a sticker on it and filled with a fixed number of balls is considered prepared and needs to be sent. Both agents can \textit{fill} the box with balls from a bucket, while only the robot can \textit{paste} a sticker and only the human can \textit{send} the box. The bucket can run out of balls, so when one ball is left, the human \textit{moves} to another room to \textit{grab} more balls and \textit{refill} it. 
 The number of balls in the box is \textit{inferable}, while all other variables are {\em observable}. 
 
 \subsubsection{Car Maintenance Domain:}
@@ -971,7 +1001,7 @@ The car's hood needs to be \textit{closed} by the human at last.
 
 \subsection{Qualitative Analysis}
 
-In the first domain, we highlight \textit{subtleties} the old solver overlooks and how ours is aware of them, updates beliefs, and effectively manages divergences. 
+In the first domain, we highlight \textit{subtleties} the \textit{existing solver} overlooks and how \textit{our approach} is aware of them, updates beliefs, and effectively manages divergences. 
 We discuss the plans obtained in two scenarios 
 as shown in Figure~\ref{fig:scenarios}. Assume that both the agents are in \textit{Kitchen} and the human acts first. Scenario~(A): Captures the agents' plans when the pasta is in \textit{Room}. 
 Scenario~(B): 
@@ -983,86 +1013,121 @@ In hindsight, the pasta is moved from \textit{Room} to {\em Kitchen}, which the 
     % Our solver predicts it when the human returns to the kitchen and assesses that the stove is {\sc on}, and their belief gets updated.
     \item \textbf{Scenario~(A):} 
     % The human leaves the kitchen and hence practically is unaware of the changes achieved in the environment by the robot's actions: {\em turn on} and {\em add salt}. 
-    As the human left {\em Kitchen}, practically, they are unaware of the changes caused by the robot's actions: {\em turn on} and {\em add salt}. (\textit{Left}) The old solver considers agents omniscient. So, the human knows that the stove is {\sc on}, and salt is added even before arriving back in {\em Kitchen}. (\textit{Right}) Thanks to both situation assessment and inference based on action observability, it estimates that when returning to the kitchen, the human assesses that the stove is {\sc on}. Moreover, it predicts that the human cannot know \textit{SaltInPot} and that this divergence, identified as relevant, needs to be handled via communication.
+    As the human left {\em Kitchen}, practically, they are unaware, or at least uncertain, about the changes caused by the robot's actions: {\em turn on} and {\em add salt}. (\textit{Left}) The \textit{existing solver} considers agents omniscient. So, the human knows that the stove is {\sc on}, and salt is added even before arriving back in {\em Kitchen}. (\textit{Right}) Thanks to the \textit{Observation} process, \textit{our approach} estimates that when returning to the kitchen, the human will assess that the stove is {\sc on}. Moreover, it predicts that the human cannot know \textit{SaltInPot} and that this divergence, identified as relevant, needs to be handled via communication.
     % The old solver considers agents omniscient, i.e., they know everything immediately once achieved. Hence, the human knows that the stove is {\sc on}, and salt is added even before being back in \textit{Kitchen}.
     % The new solver, thanks to both an appropriate situation assessment and inference based on action observability, estimates that when returning to the kitchen, the human assesses that the stove is {\sc on}.
     % Moreover, it predicts that the human cannot know the \textit{SaltInPot} fact and that this divergence, identified as relevant, needs to be handled via communication. 
     % This divergence was ineffective after the robot communicates it to the human.
-    \item
-    % \textbf{Scenario~(C):} In the updated scenario, using the old approach, the human moves to \textit{Room} to grab the pasta, but in reality, the action \textit{fails} as it is not a legal action w.r.t. the robot's belief or the ground truth. But, the way our planning system works, the human agent assesses the
-    \textbf{Scenario~(B):}
-    % With the old solver, 
-    (\textit{Left}) the human moves to \textit{Room} to \textit{grab} the pasta, but in reality, being an illegal action w.r.t. 
-    % the robot's belief or 
-    the ground truth, it \textit{fails}. 
-    (\textit{Right}) the human agent \textit{assesses} the environment to update their beliefs, knowing \textit{PastaInKitchen}. 
-    % Also, no communication is required for this update. 
-    Hence, no communication is required.
-    % environment and updates their belief state, knowing that the pasta is in the kitchen. Hence no communication is required to align their belief. The rest is self-evident.
-\end{itemize}
+    \item \textbf{Scenario~(B):}
+    (\textit{Left}) Based on false belief, the human moves to \textit{Room} to \textit{grab} the pasta, but in reality, being an illegal action w.r.t. the ground truth, it \textit{fails}. 
+    % (\textit{Right}) The human agent \textit{assesses} the environment to update their belief, knowing \textit{PastaInKitchen}. Hence, no communication is required.
+    (\textit{Right}) The human \textit{observes} their surrounding and fixes their false belief about \textit{PastaInKitchen}. Hence, no communication is required. Moreover, the \textit{Inference} process later updates the human belief about \textit{SaltInPot} since the human is co-present.
+\end{itemize} 
 
+% OLD
+% \begin{table}
+%     \begin{adjustbox}{width=0.77\columnwidth,center}
+%     \begin{tabular}{@{}c|r r r| c@{}}
+%         % \hline
+%         \multirow{2}{*}{
+%         \textbf{Domain}} & \multicolumn{3}{c|}{\textbf{\textit{Old Solver}}} & \multicolumn{1}{c}{\textbf{\textit{Our Solver}}}
+%         \\
+%         % \cline{2-6}
+%         & \multicolumn{1}{c}{\textit{S}} & \multicolumn{1}{c}{\textit{NA}} & \multicolumn{1}{c|}{\textit{IDL}} & \multicolumn{1}{c}{\textit{Com}} 
+%         \\ \cline{1-5}
+%         \textit{Cooking} & 18.6\% & 77.0\% & 23.0\%  & 54.9\%\\
+%         \textit{Box} & 25.0\% & 83.3\% & 16.7\%  & 68.8\%\\
+%         \textit{Car} & 12.5\% & 73.2\% & 26.8\%  & 79.7\%\\
+%         \hline
+%         \textbf{Average} & 18.7\% & 77.8\% & 22.2\%  & 67.8\%\\
+%     \end{tabular}
+%     \end{adjustbox}
+%     \caption
+%     {
+%     \label{tab:q_results}
+%     % Comparison of the two solvers on the two domains. 
+%     % In each domain: 
+%     For the \textit{old solver}, the success rate (\textit{S}), the ratio of failed plans due to a non-applicable action (\textit{NA}), and the ratio of failed plans due to an inactivity deadlock case (\textit{IDL}), while for \textit{our solver}: (the success rate is always 100\%), the ratio of plans including a communication action (\textit{Com}).
+%     }
+% \end{table}
+
+% V1 %
+% \begin{table}
+%     \begin{adjustbox}{width=0.77\columnwidth,center}
+%     \begin{tabular}{@{}c|c c c| c@{}}
+%         \multirow{2}{*}{\textbf{Domain}} & \multicolumn{3}{c|}{\textbf{\textit{Existing Solver}}} & \multicolumn{1}{c}{\textbf{\textit{Our Approach}}}
+%         \\
+%         & \multicolumn{1}{c}{\textit{S Align. I.B.}} & \multicolumn{1}{c}{\textit{S Div. I.B.}} & \multicolumn{1}{c|}{\textit{S}} & \multicolumn{1}{c}{\textit{Comm}} 
+%         \\ \cline{1-5}
+%         \textit{Cooking}    & 100\% &  7.0\% & 18.6\% & 54.9\%\\
+%         \textit{Box}        & 100\% & 14.3\% & 25.0\% & 68.8\%\\
+%         \textit{Car}        & 100\% &  0.0\% & 12.5\% & 83.6\%\\
+%         \hline
+%         \textbf{Average}    & 100\% &  7.1\% & 18.7\% & 69.1\%\\
+%     \end{tabular}
+%     \end{adjustbox}
+%     \caption
+%     {
+%     \label{tab:q_results}
+%     For the \textit{existing solver}: success rates are shown respectively for problems including aligned initial beliefs (\textit{S Align. I.B.}), diverging initial beliefs (\textit{S Div. I.B.}), and for all problems (\textit{S}). For \textit{our approach}: (the success rate is always 100\%), the ratio of plans including a communication action is shown (\textit{Comm}).
+%     }
+% \end{table}
+
+% V2
 \begin{table}
     \begin{adjustbox}{width=0.77\columnwidth,center}
-    \begin{tabular}{@{}c|r r r| c@{}}
-        % \hline
-        \multirow{2}{*}{
-        \textbf{Domain}} & \multicolumn{3}{c|}{\textbf{\textit{Old Solver}}} & \multicolumn{1}{c}{\textbf{\textit{Our Solver}}}
+    \begin{tabular}{@{}c|c c| c@{}}
+        \multirow{2}{*}{\textbf{Domain}} & \multicolumn{2}{c|}{\textbf{\textit{Existing Solver}}} & \multicolumn{1}{c}{\textbf{\textit{Our Approach}}}
         \\
-        % \cline{2-6}
-        & \multicolumn{1}{c}{\textit{S}} & \multicolumn{1}{c}{\textit{NA}} & \multicolumn{1}{c|}{\textit{IDL}} & \multicolumn{1}{c}{\textit{Com}} 
-        \\ \cline{1-5}
-        \textit{Cooking} & 18.6\% & 77.0\% & 23.0\%  & 54.9\%\\
-        \textit{Box} & 25.0\% & 83.3\% & 16.7\%  & 68.8\%\\
-        \textit{Car} & 12.5\% & 73.2\% & 26.8\%  & 79.7\%\\
+        & \multicolumn{1}{c}{\textit{S I.Div.B.}} & \multicolumn{1}{c|}{\textit{S}} & \multicolumn{1}{c}{\textit{Comm}} 
+        \\ \cline{1-4}
+        \textit{Cooking}    &  7.0\% & 18.6\% & 54.9\%\\
+        \textit{Box}        & 14.3\% & 25.0\% & 68.8\%\\
+        \textit{Car}        &  0.0\% & 12.5\% & 83.6\%\\
         \hline
-        \textbf{Average} & 18.7\% & 77.8\% & 22.2\%  & 67.8\%\\
+        \textbf{Average}    &  7.1\% & 18.7\% & 69.1\%\\
     \end{tabular}
     \end{adjustbox}
     \caption
     {
     \label{tab:q_results}
-    % Comparison of the two solvers on the two domains. 
-    % In each domain: 
-    For the \textit{old solver}, the success rate (\textit{S}), the ratio of failed plans due to a non-applicable action (\textit{NA}), and the ratio of failed plans due to an inactivity deadlock case (\textit{IDL}), while for \textit{our solver}: (the success rate is always 100\%), the ratio of plans including a communication action (\textit{Com}).
+    For the \textit{existing solver}: the success rate for problems including initially aligned beliefs is always 100\%, the success rate for problems with initially diverging beliefs (\textit{S I.Div.B.}), and overall success rate (\textit{S}). For \textit{our approach}: the success rate is always 100\%, and the ratio of plans including a communication action (\textit{Comm}). 
+    % The table depicts how poorly the existing solver handles belief divergences in constrast to our approach that doesn't communicate systematically.
+    The existing solver poorly handles belief divergences in constrast to our approach that doesn't communicate systematically.
     }
 \end{table}
 
-\subsection{Experimental results}
+\subsection{Experimental Results and Analysis}
 
-Quantitative results in three new domains appear in Table~\ref{tab:q_results}. 
-We consider (in box domain) \textit{three} boxes to be prepared and sent. 
-In each domain, we generated 512 different initial states, including 448 (87.5\%) with divergent initial beliefs and 64 states where beliefs are fully aligned initially. 
-Overall, 3072 plans were generated.
+A problem is defined by a starting agent (Human or Robot) and by a pair of initial Human-Robot beliefs. In each domain, the initial ground truth (initial robot belief) is defined by setting each attribute to an initial value. But, 5 selected attributes can be set to 2 possible values instead of 1. Then, 3 among the 5 selected attributes can diverge in the human belief, generating 256 pairs of initial beliefs. Hence, 12.5\% of the generated problems include initially aligned beliefs. Then, by taking into account the starting agent, we obtain 512 problems for each domain. In each domain, the actions and tasks remain the same. 
+Each of the 1536 generated problem has been solved by the \textit{existing solver} and \textit{our approach} generating a total of 3072 plans. The obtained quantitative results with the three new domains appear in Table~\ref{tab:q_results}. Note that in the Box domain, we considered \textit{three} boxes to be prepared and sent. 
 
-*
-A problem is deﬁned with a pair of initial
-HR beliefs and a starting agent (H or R). In each domain, 5 attributes (each can get 2 values, while others get 1)
-deﬁne the ground truth, R-belief. Among 5, 3 attr. can diverge in H-belief, generating 256 pairs of initial beliefs. Withthe starting agents, we have 512 problems for each domain. In each domain, the actions and tasks remain the
-same.
-*
+% With the old approach, a planning failure occurs due to: 
+% (a) an action of a plan not applicable in another agent's belief state, including the ground truth; 
+% (b) if an inactivity deadlock occurs, which is assumed to be the case after a succession of at least four {\em WAIT} and (or) {\em IDLE} actions. 
+% Such deadlocks occur when the human has a belief divergence and waits for a never-happening robot's action, e.g., waiting for \textit{adding} salt, but \textit{SaltInPot} is already achieved.
+% For the old solver, the success rate (\textit{S}), the \textit{ratios} of the number of failed plans due to a inapplicable action (\textit{NA}) and to an inactivity deadlock (\textit{IDL}) appear in the table.
+% For ours, the \textit{ratio} of successful plans with a communication action is presented under \textit{Com}.
 
-With the old approach, a planning failure occurs due to: 
-(a) an action of a plan not applicable in another agent's belief state, including the ground truth; 
-(b) if an inactivity deadlock occurs, which is assumed to be the case after a succession of at least four {\em WAIT} and (or) {\em IDLE} actions. 
-Such deadlocks occur when the human has a belief divergence and waits for a never-happening robot's action, e.g., waiting for \textit{adding} salt, but \textit{SaltInPot} is already achieved.
-For the old solver, the success rate (\textit{S}), the \textit{ratios} of the number of failed plans due to a inapplicable action (\textit{NA}) and to an inactivity deadlock (\textit{IDL}) appear in the table.
-For ours, the \textit{ratio} of successful plans with a communication action is presented under \textit{Com}.
+% As the old solver does not handle belief divergence in planning, the applicability of actions is never an issue w.r.t. another agent's beliefs. 
+% Therefore, if the \textit{IDL} case occurs, it is understood that the initial belief divergences are not tackled by modeling triggers explicitly in the task specifications. 
 
-As the old solver does not handle belief divergence in planning, the applicability of actions is never an issue w.r.t. another agent's beliefs. 
-Therefore, if the \textit{IDL} case occurs, it is understood that the initial belief divergences are not tackled by modeling triggers explicitly in the task specifications. 
+% Our solver always finds legal plans, and on average $\approx$ 69\% of them use \textit{communication}.
+% Moreover, the robot doesn't need to communicate systematically as assessing situations handles a major part of the divergences (87.5\% of the scenarios have divergent beliefs initially).
+% For the old solver, if no initial belief divergence exists, it always finds a legal plan, considering the agents omniscient. 
+% E.g., Fig.~\ref{fig:scenarios}(A). However, sometimes, this causes problems in practice.
+% Scenarios beginning with unaligned beliefs induce actions often not applicable in another agent's belief state (or the ground truth), evident by the (average) 18.7\% success rate.
 
-Our solver always finds legal plans, and on average $\approx$ 68\% of them use \textit{communication}.
-Moreover, the robot doesn't need to communicate systematically as assessing situations handles a major part of the divergences (87.5\% of the scenarios have divergent beliefs initially).
-For the old solver, if no initial belief divergence exists, it always finds a legal plan, considering the agents omniscient. 
-E.g., Fig.~\ref{fig:scenarios}(A). However, sometimes, this causes problems in practice.
-Scenarios beginning with unaligned beliefs induce actions often not applicable in another agent's belief state (or the ground truth), evident by the (average) 18.7\% success rate.
+% We can see that our solver uses more communication actions in the car maintenance domain than in the other two.
+% But looking at the \textit{low} old solver's success rate (12.5\%), we conclude that this domain generally needs more communication. 
+% Compared to others, it purposely creates non-relevant belief divergence, e.g., the robot storing the gallon in the cabinet ($\inferable$) is irrelevant.
+% After a close analysis, we found that $\approx$ 42\% of the plans have divergent human beliefs at least in one branch after the last action (\textit{leaf}) was executed (i.e., \textit{irrelevant} divergences never got communicated). 
 
-We can see that our solver uses more communication actions in the car maintenance domain than in the other two.
-But looking at the \textit{low} old solver's success rate (12.5\%), we conclude that this domain generally needs more communication. 
-Compared to others, it purposely creates non-relevant belief divergence, e.g., the robot storing the gallon in the cabinet ($\inferable$) is irrelevant.
-After a close analysis, we found that $\approx$ 42\% of the plans have divergent human beliefs at least in one branch after the last action (\textit{leaf}) was executed (i.e., \textit{irrelevant} divergences never got communicated). 
+The \textit{existing solver} always finds legal plans when dealing with aligned beliefs. But as expected, the low success rate for initially diverging beliefs (7.1\%) reflects how the \textit{existing solver} poorly handles belief divergences without specifically designed action models. Since \textit{our approach} always finds legal plans, we can say it solves a broader class of problems than the \textit{existing solver}.
 
-\section{Discussion}
+Furthermore, 87.5\% of all problems initially includes belief divergences. And even when starting with aligned beliefs, some divergences can be created along the planning process. Thus, we can state that more than 87.5\% of all problems involve belief divergences. However, only 69.1\% of the generated plans include communication actions. This means that \textit{our approach} communicates only when necessary, and not systematically.   
+
+\section{Discussion \& Conclusion}
 We formalize execution-time observability conventions based on situation assessment and action observability (ToM). We use it to estimate the evolution of the human mental state and capture belief divergences. 
 A new planner is described, which utilizes this better estimation of human mental state to plan for more robust and consistent human-robot joint activities such that a relevant belief divergence is tackled by explicitly modeled communication actions.  
 

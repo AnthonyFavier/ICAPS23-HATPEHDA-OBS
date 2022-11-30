@@ -519,17 +519,17 @@ However, the work does not consider humans as uncontrollable agents like ours, s
 
 \section{Preliminaries}
 For elaborated basic terminologies, notations, and definitions related to HTNs like task network, the problem, and solution, refer to~\cite{naubooks0014222}.  
-\begin{definition}
-\textbf{(HTN Planning Problem.)} 
-The HTN planning
-problem is a 3-tuple $\mathcal{P} = (s_0, w_0, D)$ where $s_0$ is the initial belief state (the ground truth), $w_0$ is the initial task network, and $D$ is the HTN planning domain comprising a set of propositions (P), (non-) primitive tasks (O) and methods.
-\end{definition}
+% \begin{definition}
+% \textbf{(HTN Planning Problem.)} 
+% The HTN planning
+% problem is a 3-tuple $\mathcal{P} = (s_0, w_0, D)$ where $s_0$ is the initial belief state (the ground truth), $w_0$ is the initial task network, and $D$ is the HTN planning domain comprising a set of propositions (P), (non-) primitive tasks (O) and methods.
+% \end{definition}
 
-\begin{definition} \label{def:htn-sol-plan}
-(\textbf{Solution Plan}.) 
-{A sequence of primitive tasks $\pi=(o_1,o_2,o_3...,o_k)$, s.t., $\forall o_i, o_i \in O$, is a solution plan for the HTN problem $\mathcal{P}=(s_0,w_0,D)$ iff there exists a primitive decomposition $w_p$ (for $w_0$), and $\pi$ is an instance of it. 
-}  
-\end{definition}
+% \begin{definition} \label{def:htn-sol-plan}
+% (\textbf{Solution Plan}.) 
+% {A sequence of primitive tasks $\pi=(o_1,o_2,o_3...,o_k)$, s.t., $\forall o_i, o_i \in O$, is a solution plan for the HTN problem $\mathcal{P}=(s_0,w_0,D)$ iff there exists a primitive decomposition $w_p$ (for $w_0$), and $\pi$ is an instance of it. 
+% }  
+% \end{definition}
 
 \subsection{The HATP/EHDA Architecture}
 We briefly describe the framework and discuss its ability to capture a broad class of HR collaborative planning scenarios. 
@@ -770,7 +770,8 @@ After each action, the workflow for updating agents' beliefs is the following.
 \begin{enumerate}
     \item \textbf{(Acting.)} The acting agent's belief is updated with the action effect. Each state attribute appearing in the effect gets updated with its corresponding new value, while the remaining attributes keep their same old values.
     \item \textbf{(Inference.)} \textit{Co-present} agents update their belief with all the \textit{inferable} effects of the action.
-    \item \textbf{(Observation.)} All agents update their belief states with their respective \textit{observable} facts in the next state. 
+    \item \textbf{(Observation.)} All agents update their belief states with their respective \textit{observable} facts.
+    % in the next state. 
 \end{enumerate}
 
 To update observable facts present initially using the \textit{Observation} process, first, a dummy action is executed with no precondition and effect.
@@ -822,23 +823,26 @@ To produce a legal joint-plan, the robot is fine with such belief divergences un
 In such case, the relevant divergences need to be tackled.
 
 \begin{definition} \label{def:reldiv}
-\textbf{(Relevant Belief Divergence.)} A relevant belief divergence, also referred to as an ambiguous situation or ambiguity, is a belief divergence that influences the next human action(s). In other words, if the human agent, based on $\mathit{B}_{\varphi_h}^{s_i}$, can perform a set of actions which is different or with different effects than that w.r.t. to $\mathit{B}_{\varphi_r}^{s_i}$.
+\textbf{(Relevant Belief Divergence.)} A relevant belief divergence, also referred to as an ambiguous situation or ambiguity, is a belief divergence that influences the next human action(s). In other words, if the human agent, based on $\mathit{B}_{\varphi_h}^{s_i}$, can perform a set of actions which is different or with different effects than w.r.t. to $\mathit{B}_{\varphi_r}^{s_i}$.
 \end{definition}
+
+% \textbf{[[]Note also that }the appearance of a relevant divergence and when it is effective (i.e. when it influences the next human actions) may be different. 
+The appearance of a diverging attribute in the belief state may not make it immediately relevant. 
+% it becomes relevant 
+% divergence 
+% (i.e. it influences the next human actions) 
+% might be different.
+For example, a diverging attribute may be present in the initial human belief, but it can be only predicted to be affecting the humans' actions in the later stage of planning.
+This affects \textit{when} will the robot communicate with the human.
+% (discussed later). 
 
 % Currently, as soon as a belief divergence affects the next human actions, it is considered as \textit{relevant} and needs to be tackled. 
 % Although we keep the notion of relevancy quite simple in this context, 
-It could be an interesting future work to checking the relevance of a belief divergence 
+However, it could be an interesting future work to check in a principled way, the relevance of a belief divergence 
 % divergence could be done more accurately, which could be 
-by assessing its overall positive and detrimental impacts on the joint task by allowing humans to act with their wrong beliefs, in a principled way. 
+by assessing its overall positive and detrimental impacts on the joint task by allowing humans to act with their wrong beliefs and not communicating immediately.
+% , in a principled way. 
 But, it is out of the scope of this work. 
-
-% \textbf{[[]Note also that }the appearance of a relevant divergence and when it is effective (i.e. when it influences the next human actions) may be different. 
-To motivate 
-Note that the appearance of a diverging attribute in the belief state and when it becomes relevant 
-% divergence 
-% (i.e. it influences the next human actions) 
-might be different.
-*For instance, a divergence may be present in the initial human belief but only affects the third human action.*
 
 \subsubsection{Resolved with Minimal Communication}
 
@@ -855,7 +859,7 @@ might be different.
 
 % When a relevant belief divergence is detected, it can be avoided by planning communication actions s.t. the robot aligns only the required facts in the human belief.
 
-A belief state marked relevant to be handled can be tackled by planning communication actions such that the robot communicates/aligns only the required facts in the human belief.
+A belief state marked as \textit{relevant} can be tackled by planning communication actions such that the robot communicates/aligns only the required facts in the human belief.
 The communication occurs via a \textit{distinct set} of communication actions, which are modeled as a predefined communication protocol for a pair of sender-receiver agents.
 
 % \paragraph{Modeling Communication Actions} 
@@ -873,20 +877,37 @@ The communication occurs via a \textit{distinct set} of communication actions, w
 
 %%%%%%%%%%%%%%%%%%%
 
-\textbf{(Modeling Communication Actions.)} 
-Suppose there exists a state-variable function, $f_{svs}:(?g_1 (gr_1), ..., ?g_k (gr_k),\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$ such that,
-for the current world state $s \in \mathcal{S}$, the corresponding state attribute, $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s)$ maps to $q$.
+\noindent \textbf{(Modeling Communication Actions.)} 
+% Suppose there exists a state-variable function, $f_{svs}:(?g_1 (gr_1), ..., ?g_k (gr_k),\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$ such that,
+% for the current world state $s \in \mathcal{S}$, the corresponding state attribute, $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s)$ maps to $q$.
 
-An agent $\varphi_i$ can communicate this attribute-value pair to another agent $\varphi_j$, if the following conditions meet as action precondition: 
-(1.) For $\varphi_i$, its belief state satisfies the fact being communicated, i.e.,
-$f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_i}^s) = q$, and (2.) $\varphi_j$'s belief state does not satisfy this truth, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) = r$ such that $r \neq q$.
-The effect of this action is that now 
-$\varphi_j$'s belief is updated, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) \leftarrow q$. 
+% An agent $\varphi_i$ can communicate this attribute-value pair to another agent $\varphi_j$, if the following conditions meet as action precondition: 
+% (1.) For $\varphi_i$, its belief state satisfies the fact being communicated, i.e.,
+% $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_i}^s) = q$, and (2.) $\varphi_j$'s belief state does not satisfy this truth, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) = r$ such that $r \neq q$.
+% The effect of this action is that now 
+% $\varphi_j$'s belief is updated, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) \leftarrow q$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We propose a generic communication action schema ($ca$) in this context. 
+Suppose there exists a state-variable function,  $f_{svs}:(?g_1 (gr_1),..., ?g_k (gr_k),\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$, such that for the current world state $s \in \mathcal{S}$, 
+$f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s)$ maps to $q$.
+
+The agent $\varphi_i$ can \textit{communicate} 
+this attribute-value pair to $\varphi_j$ (\textit{via} the action $ca_{\varphi_i, \varphi_j}(f_{\textit{svs}}(...),q)$), if the following conditions (i.e., its preconditions) meet: 
+(1) For $\varphi_i$, 
+$f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_i}^s) = q$, and (2) for $\varphi_j$,
+$f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) = r$ s.t.
+$r \neq q$.
+Later, $\varphi_j$'s belief is updated, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) \leftarrow q$. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % At this stage, say, the ground truth ($s_i$), we assume \textit{Updates Workflow} was already called, and then the sender reasoned out and decided to \textit{tackle} the receiver's divergent beliefs. 
 
 % \subsubsection{Communicate Only The Required Facts.}
-\textbf{(Communicate Only The Required Facts.)}
+\noindent \textbf{(Communicate Only The Required Facts.)}
 Note that there exists at least one \textit{attribute}-\textit{value} in the receiver's belief state causing adverse effects. 
 The approach, explained in the next \textit{three} steps, looks for the minimal number of such attribute-value pairs to be communicated so that
 the divergence in the updated belief is made \textit{irrelevant}, or even eliminated.
@@ -894,15 +915,29 @@ the divergence in the updated belief is made \textit{irrelevant}, or even elimin
     \item 
     \textit{Store} each attribute and its value if the attribute's value differs in the receiver's belief from the sender's belief. 
 
-    \item For them, \textit{build} actions, $\textit{comm-action}_i$, following the schema described earlier. Say, they are equally costly.  
+    % \item For them, \textit{build} actions, $\textit{comm-action}_i$, following the schema described earlier. Say, they are equally costly. 
+    \item For each stored attribute-value pair, \textit{build} a communication action $ca_{\varphi_r, \varphi_h}(...)$ based on the schema described earlier. They are considered equally costly.
     
     \item 
     (Follow Breadth-First Search) 
-    The \textit{source} is $B_{\varphi_h}^{s_i}$, and each $\textit{comm-action}_i$ changes and aligns \textit{exactly} one attribute while its updated value satisfies the ground truth. If $\textit{comm-action}_i$ is applied, generates a new belief state (following the regular state transition rules), using: $B_{\varphi_h}^{s_i,1} = \gamma(B_{\varphi_h}^{s_i}, \textit{comm-action}_i)$.
-    It continues until the first (updated) belief is selected to expand s.t. its remaining divergence is \textit{ineffective}. We then \textit{retrieve} all the actions used from the root until the current belief state.   
+    % The \textit{source} is $B_{\varphi_h}^{s_i}$, and each $\textit{comm-action}_i$ changes and aligns \textit{exactly} one attribute while its updated value satisfies the ground truth. If $\textit{comm-action}_i$ is applied, generates a new belief state (following the regular state transition rules), using: $B_{\varphi_h}^{s_i,1} = \gamma(B_{\varphi_h}^{s_i}, \textit{comm-action}_i)$.
+    % It continues until the first (updated) belief is selected to expand s.t. its remaining divergence is \textit{ineffective}. We then \textit{retrieve} all the actions used from the root until the current belief state.   
+    (Follow Breadth-First Search) 
+    The \textit{source} is $B_{\varphi_h}^{s_i}$, and each $ca_{\varphi_r, \varphi_h}(...)$ changes and aligns \textit{exactly} one attribute while its updated value satisfies the ground truth. 
+    Applying $ca_{\varphi_r, \varphi_h}(...)$ generates a new belief state following state transition rules, i.e., $B_{\varphi_h}^{s_i,1} = \gamma(B_{\varphi_h}^{s_i}, ca_{\varphi_r, \varphi_h}(...))$.
+    It continues until the first (updated) belief is \textit{selected} to expand s.t. its remaining divergence is ineffective. The actions used from the root until the current belief state are \textit{retrieved}.
 \end{enumerate}
 
-These retrieved actions are appended to the sender's plan.
+% These retrieved actions are appended to the sender's plan.
+% Once the above subroutine finishes, the retrieved action set $\mathit{CA} = \{ca^{i}_{\varphi_r,\varphi_h}(...)\}$ is utilized for belief alignment. 
+% We redefine Definition~\ref{def:joint-sol-plan} to make it sound w.r.t. our new planning approach. 
+% Assume at each step ($t=0,1,2,...$), humans perform SA, while the robot executes each communication action $ca \in \mathit{CA}$, such that the human's belief state \textit{updates immediately} (takes $0$ seconds). 
+Once the above subroutine finishes, the retrieved action set $\mathit{CA} = \{ca^{i}_{\varphi_r,\varphi_h}(...)\}$ must be inserted in the plan for belief alignment. Thus, Definition~\ref{def:joint-sol-plan} is redefined to be sound w.r.t. our approach. 
+At each step,
+% ($t=0,1,2,...$)
+humans perform \textit{Observation}, while the robot executes each communication action $ca \in \mathit{CA}$, s.t. the human's belief \textit{updates immediately}.
+% (takes $0$ seconds). 
+
 
 \subsubsection{Resolved by Delaying a Robot Action}
 % *
@@ -910,10 +945,17 @@ These retrieved actions are appended to the sender's plan.
 % However, this solution illustrate one of the possible proactive behavior the robot could have thanks to our contribution, thus is worth discussing and mentioning.
 % *
 
-Most of the encountered relevant belief divergences are due to missed inferable effects. 
+Encountered relevant belief divergences are created mainly due to the missed inferable effects. 
 % Thus, another way to avoid such ambiguity is to identify the planned robot action creating the relevant divergence and postpone it until the human is \textit{co-present} s.t. the \textit{Inference} process can applied and make the originally missed effects known by the human.
-Thus, another way to avoid such ambiguity is to postpone the planned non-observed robot action (diverging action) in order to make the originally missed effects known by the human. The corresponding process has one strong assumption s.t. the relevant divergence must come from only one inferable attribute. With this in mind, the process is the following. 
-First, the relevant divergence is solved with communication to create a safe branch in the solution plan tree. After, we check if the relevant divergence was already present in the initial human belief or if it is due to a non-observed action, we proceed only in the latter case. Next, we identify the diverging action by sequentially applying the already planned actions while monitoring when the relevant inferable attribute diverges. Once identified, a new branch is created before the diverging action, and "\textit{Delay}" actions are inserted in the robot's plan until the human is \textit{co-present}. Then, the diverging action is inserted and the nominal planning process is resumed.
+Thus, another way to avoid such ambiguity is to postpone the planned robot actions that are not observed by the humans, this is in order to make the originally missed effects known to the human. 
+The corresponding process has one strong assumption that is the relevant divergence must come from only one inferable attribute. 
+With this assumption, we propose the following: 
+First, the relevant divergence is solved with communication to create a safe branch in the solution plan tree. 
+Then we check if the relevant divergence was already present in the initial human belief or if it is due to a non-observed action, we proceed only in the latter case. 
+Next, we identify the diverging action by sequentially regressing the current trace.
+% while monitoring when the relevant inferable attribute diverges. 
+Once identified, a new branch is created before this diverging action, and {\sc delay} actions are inserted in the robot's plan until the human is \textit{co-present}. 
+Then, the diverging action is inserted and the nominal planning process is resumed.
 
 % Algo:
 % \begin{itemize}
@@ -942,24 +984,27 @@ First, the relevant divergence is solved with communication to create a safe bra
 
 % This delaying solution is only discussed qualitatively in this section because it currently has limitations compared to the communication one. Indeed, the relevant divergence must be due to only one \textit{inferable} attribute and the agents must co-present at least once after the diverging action. Thus, delaying the robot action to fix the divergence isn't always feasible. Therefore, this solution is used along with the communication solution, which is always working, and we later select the best one to use. However, this selection is based on accurate \textit{plan evaluation} which is currently lacking in the scheme and out of the scope of this paper.  
 
-To apply this delaying solution the relevant divergence must be due to only one \textit{inferable} attribute and the agents must be co-present at least once after the diverging action. Thus, delaying the robot's action to fix the divergence isn't always feasible. Therefore, this solution is used along with the communication solution, which is always working, and we later select the best one for the robot. However, this selection is based on accurate \textit{plan evaluation} which is currently lacking in this scheme and out of the scope of this paper.
-As a result of all these limitations, this solution is only discussed qualitatively in this section and will not appear in the formal proofs and evaluations parts. 
-
-Nevertheless, this solution was worth to be mentioned and discussed because it illustrates well the possible proactive behaviors the robot could be endowed thanks to our contribution. For more details, a pilot study is provided in appendix.
+To use this approach, the relevant divergence must be due to only one \textit{inferable} attribute and the agents must be co-present at least once after the state in which the diverging action was applied. 
+Thus, delaying the intended robot's action is not always feasible. 
+The approach is used along with the communication solution, such that the latter is always working, and we later can select the best one for the robot. 
+However, this selection is based on an accurate \textit{policy evaluation} method, which is currently lacking in this planning scheme.
+Due to all these limitations, this solution approach is only discussed qualitatively in this section and will not appear in the formal proofs and evaluations parts. 
+Nevertheless, we see it worth mentioning and discussing it briefly as it illustrates well the possible proactive behaviors the robot can be endowed with --- thanks to our contributions. 
+For more details, a pilot study is provided in the appendix.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 \section{Formal Properties}
-Note that our solver has a similar high-level elaboration process, i.e., its underlying mechanism, as the old solver but with a better estimation of the evolution of agents' beliefs.  
+We note that our solver has a similar high-level elaboration process, i.e., its underlying mechanism, as the old solver but with a better estimation of the evolution of agents' beliefs.  
 However, when discussing its soundness and completeness, dependent on the soundness and completeness of the underlying mechanism, we must distinguish between the problem specifications used by these solvers. 
 
 In the worst case, our specifications would pick each $p \in P$ (all propositions), and generate a new set of primitive propositions for every possible combination of $|\{\observable,\inferable\}| \times |\mathit{Places}|$. 
 So, the size of the new encoding for primitive propositions is worst-case \textit{linear} in the size of $P$.
 
 For the old specifications and to support the old solver's simplified assumptions, an equivalent encoding to the above can be considered $p$ belonging to the $\inferable$ class for every $place \in \mathit{Places}$, and the agents can \textit{always} be considered co-present.  
-Note that for a domain like Blocksworld where explicit modeling of $\mathit{Places}$ is not required, it considers a \textit{single} dummy place $p_{du}$ (depicting that everything occurs here) to serve this new encoding. So, it \textit{ensures} that transformed formalism captures everything that can be formulated using the original dual-HTNs but technically provides a latitude to model more realistic problems. 
+Note that for a domain like Blocksworld where explicit modeling of $\mathit{Places}$ is not required, it considers a \textit{single} dummy place $p_{du}$ (depicting that everything occurs here) to serve this new encoding. So, it \textit{ensures} that transformed formalism captures everything that can be formulated using the original dual-HTN but technically provides a latitude to model more realistic problems. 
 
 \begin{theorem}
 \textbf{(Soundness.)} The new solver is sound.
@@ -989,7 +1034,9 @@ Implies, the joint solution plan is executable.
 Suppose a problem modeled based on our formalism has a solution, say, a joint solution tree, $\tau$ and is sound. 
 From $\tau$, remove all the communication and situation assessment steps, and say it generates $\tau'$. Now, relax the original problem, considering all the agents are always co-present and making all the propositions \textit{inferable} everywhere. 
 Technically, the solver will generate $\tau'$ for this new problem when it exhaustively generates the whole search space (of course, it may contain redundant actions). 
-We assure it believing in the underlying mechanism and that there is at least one solution ($\tau$) for the original problem. As a result, it is trivial to visualize that $\tau'$ is always extendable to generate $\tau$ w.r.t. the original problem. (\textit{Updates Workflow}.) After the execution of each step, one can employ the situation assessment and action's effect inference subroutines, checking for belief divergences and using communication actions if needed. 
+We assure it believing in the underlying mechanism and that there is at least one solution ($\tau$) for the original problem. As a result, it is trivial to visualize that $\tau'$ is always extendable to generate $\tau$ w.r.t. the original problem. 
+% (\textit{Updates Workflow}.) 
+After the execution of each step, one can employ \textit{Nominal Action Workflow}, checking for belief divergences and using communication actions if needed. 
 \end{proof}
 \end{theorem}
 

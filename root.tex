@@ -275,7 +275,7 @@ The models are based on the notion of {\em co-presence} and two types of \textit
 We note that agents' SA models are managed at the symbolic level and appended to the HATP/EHDA framework to be conceptualized~\cite{buisan:hal-03684211}. 
 More specifically, we upgrade the framework's existing planning scheme to utilize these models as a part of the deliberation process.   
 
-Our integration allows for estimating ambiguous situations caused due to estimated \textit{false} human beliefs such that they are detected and avoided through different means. 
+Our integration allows for estimating ambiguous situations due to estimated \textit{false} human beliefs such that they are detected and avoided through different means. 
 For example: (1) the robot communicates with the human to correct their false belief, and (2) the robot delays its actions on purpose. We thoroughly study the former case and show that our new planning scheme captures the evolution of individual agents' beliefs and estimates belief divergences that arise in practice. 
 It then decides if and when belief alignment is needed and achieves it by communicating with humans, but only minimally and in a principled way. 
 % To add a different flavor, 
@@ -532,8 +532,8 @@ problem is a 3-tuple $\mathcal{P} = (s_0, w_0, D)$ where $s_0$ is the initial be
 \end{definition}
 
 \subsection{The HATP/EHDA Architecture}
-We briefly describe the framework and discuss its ability to capture a broad class of HRC scenarios. 
-It comprises a dual-HTN based task specification model. It supports the robot to act in the presence of a human agent even when they do not share a task to achieve in the beginning, while considers the human congruent. 
+We briefly describe the framework and discuss its ability to capture a broad class of HR collaborative planning scenarios. 
+It comprises a dual-HTN based task specification model. It plans for the robot to act in the presence of a human agent even when they do not share a task to achieve in the beginning, while it considers the human congruent with the high-level task. 
 % Or, it can also support the robot planning for both agents by asking the human to help it occasionally, can manage the creation of shared tasks, handle human's reactions modeled explicitly via triggers, etc. More details on triggers  in~\cite{ingrand1996prs,AlamiCFGI98}.   
 % Or, it can also support requests to involve the human fully or partially in the robot task, can manage the creation of shared tasks, handle human's reactions modeled explicitly via triggers, etc. More details on triggers  in~\cite{ingrand1996prs,AlamiCFGI98}.  
 Or, it can also ask the human for occasional help to accomplish its task or manage the creation of shared tasks~\cite{buisan:hal-03684211}, handle human's reactions modeled explicitly via triggers, etc. More details on triggers  in~\cite{ingrand1996prs,AlamiCFGI98}.  
@@ -561,7 +561,7 @@ Here, each $o_i^h$ represents a choice, often out of several, the human could ma
 
 A simplifying assumption the planning scheme makes is that if the actions of the human and robot at a given time stamp are conflicting, then they need to be modeled and handled explicitly, helping the parallelization to be sound~\cite{CrosbyJR14,ShekharB20}.
 On the other hand, the assumption of a single agent acting at a time comes up with an advantage. Since humans are uncontrollable, and so one could think of possible joint actions (the humans' next predicted action could also be \textit{delay} or \textit{leave} among others), this assumption often enables the scheme to explore a broader search space. 
-However, most importantly, our contribution is agnostic to this limitation of the underlying framework.
+However, most importantly, our main contribution is agnostic to this limitation of the underlying framework.
 
 \subsection{A General Understanding of Common Ground}
 The formalization below is based on the standard state-variable representation (for more details~\cite{naubooks0014222}) while we abuse the standard notations slightly, sometimes, to maintain the flow of the discussion.
@@ -589,8 +589,7 @@ Suppose $s \in \mathcal{S}$ is the real state with the ground truth. As per our 
 Suppose that 
 % $f_{\textit{svs}_i}:(g_{(1)l},g_{(2)m},...,g_{(k)n},s) \rightarrow g_{(k+1)p}$
 % $f_{\textit{svs}_i}:(g_{(1)l},g_{(2)m},...,g_{(k)n},\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$
-$f_{\textit{svs}_i}(g_{(1)l},g_{(2)m},...,g_{(k)n},s) = g_{(k+1)p}$
-, for a legal state $s$ and $g(i)$ is the $i^{th}$ group while $g(i)j$ is its $j^{th}$ element, represents a possible {\em grounding} (Definition~\ref{def:svf}).
+$f_{\textit{svs}_i}(g_{(1)l},g_{(2)m},...,g_{(k)n},s) = g_{(k+1)p}$, for a legal state $s$ and $g(i)$ is the $i^{th}$ group while $g(i)j$ is its $j^{th}$ element, represents a possible {\em grounding} (Definition~\ref{def:svf}).
 
 \begin{definition} \label{def:bd}
 \textbf{(Belief Divergence.)}
@@ -608,6 +607,7 @@ Agents' SA processes are modeled at the symbolic level and utilized in planning 
 % More precisely, These processes are themselves based on a symbolic Place-Based model of observability described below.
 
 % Our main intuition behind formalizing the SA processes is that we want to \textit{exploit} --- by estimating it in a straightforward manner, the agents' real-time sensing ability (or ability to see things, in case of humans) in \textit{offline planning}. We note that they are modeled as \textit{deterministic} processes. 
+
 Our main intuition behind formalizing the SA processes is that we want to \textit{exploit} in \textit{offline planning} --- by estimating in a straightforward manner --- the agents' real-time sensing and reasoning ability about their surrounding. We note that they are modeled as \textit{deterministic} processes. 
 % However, we understand that such evaluation is generally done precisely with \textit{geometric reasoners} at run-time, but it would be less intuitive to consider such reasoners while modeling SA at the symbolic level. 
 % In line with the DA's framework, those reasoners make more sense during execution and can be used along with perception and supervision to handle robot's behavior to \textit{non-estimated} human initiatives. 

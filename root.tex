@@ -104,7 +104,7 @@
 % \vspace{- -- No negative value may be used in proximity of a caption, figure, table, section, subsection, subsubsection, or reference
 % \vskip{- -- No negative value may be used to alter spacing above or below a caption, figure, table, section, subsection, subsubsection, or reference
 
-\setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
+\setcounter{secnumdepth}{2} %May be changed to 1 or 2 if section numbers are desired.
 
 % The file aaai22.sty is the style file for AAAI Press
 % proceedings, working notes, and technical reports.
@@ -206,13 +206,13 @@ Will They Know? Integrating Theory of Mind \\ in Human Aware Task Planning for C
 
 % anthony-v4
 It is essential for a collaborative robot to consider Theory of Mind (ToM) when interacting with humans. Several works integrate ToM when executing joint plans to adapt online the robot's behavior to unplanned human initiatives. 
-However, having such considerations while planning offline for the robot by taking humans' behaviors into account; can offer it smarter and more proactive alternatives.
+However, having such considerations while planning \textit{offline} for the robot by taking humans' behaviors into account; can offer it smarter and more proactive alternatives.
 Recent offline planning schemes like HATP/EHDA explicitly model humans as uncontrollable agents and aim to plan for robot's actions while coordinating them \textit{implicitly} with the estimated human's behaviors. These schemes are suitable for and would benefit from integrating ToM concepts in a principled way to anticipate human behavior better.
 In this paper, based on an existing scheme, we propose a new contribution --- an offline planning approach allowing for better estimation and exploitation of the human's mental state. 
 More precisely, our approach formalizes for each agent simple yet elegant situation assessment models, which are managed at the symbolic level and inserted in an existing planning framework. 
 They are based on the notion of {\em co-presence}
 % Some Situation Assessment processes are modeled and inserted in the planning process, distinctly for each agent. These models are based on \textit{co-presence} 
-and two types of \textit{action effects}: (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at any time. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs are detected and can be avoided by different means (communication or delayed robot actions).
+and two types of \textit{action effects}: (1) facts that are inferred while performing an action or observing an action being executed, and (2) facts that can be observed by an agent at any time. Thanks to this addition, we show how ambiguous situations due to estimated false human beliefs are detected and can be avoided by different means, e.g., communication and delayed robot actions.
 We implemented our new conceptual approach, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains.
 
 
@@ -249,9 +249,11 @@ We implemented our new conceptual approach, prove its soundness and completeness
 \section{Introduction}
 % With the increasing penetration of sensor networks, advancements in robotic technology, the Internet of Things (IoT), etc., multi-robot systems are becoming ubiquitous, and the complexity of the tasks these autonomous robots can handle individually or together as a team is constantly increasing.
 % However, robots collaborating and (or) interacting with humans, for example, a robot hands-over, a robot achieving a joint task with the help of a human or receiving some routine help from a human, etc., is seldom seen in our day-to-day life, but will soon become ubiquitous, too.   
-Human-Robot Collaboration (HRC) is a current research focus due to the growing number of robot-assisted applications~\cite{kragic2021effective,selvaggio2021autonomy}. Collaborative robots add clear value to manufacturing by promising to boost productivity and improve working conditions~\cite{johannsmeier2016hierarchical}. In assembly lines, there is a strong economic advantage to allowing robots and humans to collaborate~\cite{nikolaidis2012human,coupete2015gesture}. Therefore, a certain amount of autonomy from the robot's side is quite beneficial with respect to the collaboration's efficiency and efficacy.  
+Human-Robot Collaboration (HRC) is a current research focus due to the growing number of robot-assisted applications~\cite{kragic2021effective,selvaggio2021autonomy}. Collaborative robots add clear value to manufacturing by promising to boost productivity and improve working conditions~\cite{johannsmeier2016hierarchical}, while there are clear advantages of allowing robots and humans to work together in (future) workshops~\cite{hoffman2007effects,coupete2015gesture}.
+% . In assembly lines, there is a strong economic advantage to allowing robots and humans to collaborate~\cite{nikolaidis2012human,coupete2015gesture}. 
+Therefore, autonomy from the robot's side is quite beneficial with respect to the collaboration's efficiency and efficacy.  
 However, effective integration of robots in workplaces is non-trivial and primarily raises two types of research challenges: (1) perceiving humans' behavior and predicting their intended goals/tasks \cite{cheng2020towards,cheng2019human}, and (2) planning for the robot's behavior while also considering humans' operators, which is also broadly known as human-aware planning and decision-making~\cite{CirilloKS09,alami2006toward,de2015hatp,CramerKD21,UnhelkarLS20}, and negotiating for role allocation~\cite{roncone2017transparent}. 
-In this paper, we focus on the latter, and in particular, human-aware interaction planning for a subclass of human-robot collaborative tasks, namely sequential tasks with known joint task objectives~\cite{cheng2021human,UnhelkarLS19,buisan:hal-03684211}, which can be applied in real-world domains like assembly line~\cite{unhelkar2018human}, for supporting human surgeons~\cite{jacob2013collaboration}, and astronauts~\cite{diftler2011robonaut}. 
+In this paper, we focus on the latter, and in particular, human-aware interaction planning for a subclass of human-robot collaborative tasks, namely sequential tasks with known joint task objectives~\cite{cheng2021human,UnhelkarLS19,buisan:hal-03684211}, which can be applied in real-world domains like a robot supporting human surgeons~\cite{jacob2013collaboration}, workshops~\cite{unhelkar2018human}, and astronauts~\cite{diftler2011robonaut}. 
 
 For seamless human-robot collaboration, it is essential to integrate a task planning framework~\cite{lallement2018hatp} or a scheduling framework~\cite{ferreira2021scheduling} in an \text{online} joint behavior execution scheme. 
 In~\cite{PupaS21}, planning information is dynamically integrated into the scheduling framework, while Devin and Alami~(\citeyear{devin2016implemented}) (henceforth, DA) propose to consider ToM when interacting with humans to react to their \textit{unplanned} run-time initiatives,
@@ -263,8 +265,9 @@ reduces flexibility and makes humans more stressed as, roughly speaking, the rob
 % The framework's supervisor keeps an eye on the progress of the execution from both humans' and robots' perspectives using ToM. If replanning succeeds, the human part of the new plan is shared along with other essential task details to continue. 
 
 Recently proposed planning frameworks as in~\cite{buisan:hal-03684211,UnhelkarLS19} provide more flexibility to the human. These offline approaches accept as input one or more of HR task knowledge, human activities and their intentions, environment states, model specifications, shared goals, etc. 
-They generate robot plans that are implicitly coordinated with estimated human behaviors while considering humans as {\em uncontrollable} agents, unlike the frameworks producing joint plans that are coordinated (almost) explicitly~\cite{alami2006toward,lallement2018hatp,roncone2017transparent}.
-So one straightforward approach could be to have a mechanism that somehow adapts the very idea of one such flexible scheme in the DA's online framework. 
+Unlike the frameworks proposed in~\cite{alami2006toward,lallement2018hatp,roncone2017transparent}, they generate robot plans that are implicitly coordinated with estimated human behaviors while considering humans as {\em uncontrollable} agents. 
+However, those frameworks rather produce explicitly coordinated HR joint plans that are legible and acceptable by the human while relying more on replanning.
+So one straightforward approach could be to have a mechanism that somehow adapts the very idea of a recently proposed flexible scheme in the DA's online framework. 
 
 In this work, we propose to estimate humans' \textit{predictable} execution-time initiatives in offline planning. And for that, we formalize a simple yet elegant version of Theory of Mind and integrate it with the process of the HATP/EHDA framework~\cite{buisan:hal-03684211} (extends  HATP~\cite{lallement2018hatp,CirilloKS09}). 
 One main reason to select HATP/EHDA as the basis for realizing our version of ToM is that, it uses factored task model and specifications that make the problem more compact and amenable to   reasoning, which is less likely with frameworks~\cite{unhelkar2019learning} employing flat models~\cite{levine2014concurrent,unhelkar2019learning}.
@@ -275,13 +278,24 @@ The models are based on the notion of {\em co-presence} and two types of \textit
 We note that agents' SA models are managed at the symbolic level and appended to the HATP/EHDA framework to be conceptualized~\cite{buisan:hal-03684211}. 
 More specifically, we upgrade the framework's existing planning scheme to utilize these models as a part of the deliberation process.   
 
-Our integration allows for estimating ambiguous situations due to estimated \textit{false} human beliefs such that they are detected and avoided through different means. 
-For example: (1) the robot communicates with the human to correct their false belief, and (2) the robot delays its actions on purpose. We thoroughly study the former case and show that our new planning scheme captures the evolution of individual agents' beliefs and estimates belief divergences that arise in practice. 
+This integration allows for estimating ambiguous situations due to estimated \textit{false} human beliefs such that they are detected and avoided through different means. 
+For example: (1) the robot communicates with the human to correct their false belief, and (2) the robot (on purpose) delays its action creating a divergence.
+The latter is more to show proactive behavior, where the robot can estimate and reason about actions so that humans can be aware of the {\em key updates}, ensuring that humans could rather perceive the situation. 
+However, we thoroughly study only the \textit{first} case showing that our new planning scheme captures the evolution of individual agents' beliefs and estimates belief divergences that arise in practice. 
 It then decides if and when belief alignment is needed and achieves it by communicating with humans, but only minimally and in a principled way. 
 % To add a different flavor, 
-For the latter case, we provide a pilot study in appendix and intend to investigate in the future.   
+For the \textit{second} case, we provide just a pilot study and intend to investigate in the future.   
 
-We implement this novel concept for HR collaborative planning, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains. Benchmarks (details), code, and a document detailing the background, related work, and more results are provided. 
+We implement this novel concept for HR collaborative planning, prove its soundness and completeness, discuss its effectiveness qualitatively, and show experimental results on three novel domains. 
+
+The paper is structured as follows: 
+We discuss the related work in the next section, and then we introduce the section that briefly describes the underlying framework, which we extend essentially to conceptualize our ideas. Next, we describe models based on simple ToM, discussing how SA models are formalized based on the notion of observability. The next section follows this and discusses how simple ToM is used to update the agents' beliefs. 
+We further elaborate this section: it first gives a workflow using agents' SA models for the belief updates, and then discusses how ambiguities in the agents' understanding of the world are computed and to verify if they are relevant.
+It then discusses approaches to fix these ambiguities and some inline work for the future.
+Next to this section, we provide proof of soundness and completeness of the updated planning scheme ({\em omitted} due to the page constraints and {\em provided} in the appendix), followed by the evaluation section discussing both qualitative and quantitative results. 
+We conclude the paper with a discussion.  
+
+(Benchmarks (with more details), code, and a document detailing the background, related work, and more results are provided. (This paragraph to be omitted.)) 
 \textbf{??VERIFY - what all provided??}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -517,7 +531,7 @@ However, the work does not consider humans as uncontrollable agents like ours, s
 
 % ****
 
-\section{Preliminaries}
+\section{The Underlying Planning Framework}
 For elaborated basic terminologies, notations, and definitions related to HTNs like task network, the problem, and solution, refer to~\cite{naubooks0014222}.  
 % \begin{definition}
 % \textbf{(HTN Planning Problem.)} 
@@ -563,7 +577,7 @@ A simplifying assumption the planning scheme makes is that if the actions of the
 On the other hand, the assumption of a single agent acting at a time comes up with an advantage. Since humans are uncontrollable, and so one could think of possible joint actions (the humans' next predicted action could also be \textit{delay} or \textit{leave} among others), this assumption often enables the scheme to explore a broader search space. 
 However, most importantly, our main contribution is agnostic to this limitation of the underlying framework.
 
-\subsection{A General Understanding of Common Ground}
+\subsection{An Understanding of Common Ground}
 The formalization below is based on the standard state-variable representation (for more details~\cite{naubooks0014222}) while we abuse the standard notations slightly, sometimes, to maintain the flow of the discussion.
 
 To describe an environment a set of \text{constant symbols} is used. 
@@ -880,21 +894,20 @@ The communication occurs via a \textit{distinct set} of communication actions, w
 \noindent \textbf{(Modeling Communication Actions.)} 
 % Suppose there exists a state-variable function, $f_{svs}:(?g_1 (gr_1), ..., ?g_k (gr_k),\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$ such that,
 % for the current world state $s \in \mathcal{S}$, the corresponding state attribute, $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s)$ maps to $q$.
-
+% 
 % An agent $\varphi_i$ can communicate this attribute-value pair to another agent $\varphi_j$, if the following conditions meet as action precondition: 
 % (1.) For $\varphi_i$, its belief state satisfies the fact being communicated, i.e.,
 % $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_i}^s) = q$, and (2.) $\varphi_j$'s belief state does not satisfy this truth, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) = r$ such that $r \neq q$.
 % The effect of this action is that now 
 % $\varphi_j$'s belief is updated, i.e., $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) \leftarrow q$. 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 We propose a generic communication action schema ($ca$) in this context. 
-Suppose there exists a state-variable function,  $f_{svs}:(?g_1 (gr_1),..., ?g_k (gr_k),\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$, such that for the current world state $s \in \mathcal{S}$, 
-$f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s)$ maps to $q$.
+Suppose there exists a state-variable function,  $f_{svs}:(?g_1 (gr_1),..., ?g_k (gr_k),\mathcal{S}) \rightarrow ?g_{k+1} (gr_{k+1})$, s.t. for the current world state $s \in \mathcal{S}$, 
+% $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s)$ maps to $q$.
+$f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},s) = q$.
 
 The agent $\varphi_i$ can \textit{communicate} 
-this attribute-value pair to $\varphi_j$ (\textit{via} the action $ca_{\varphi_i, \varphi_j}(f_{\textit{svs}}(...),q)$), if the following conditions (i.e., its preconditions) meet: 
+this attribute-value pair to $\varphi_j$ \textit{via} the action $ca_{\varphi_i, \varphi_j}(f_{\textit{svs}}(...),q)$, if the following conditions (i.e., its preconditions) meet: 
 (1) For $\varphi_i$, 
 $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_i}^s) = q$, and (2) for $\varphi_j$,
 $f_{\textit{svs}}(g_{(1)l},...,g_{(k)n},B_{\varphi_j}^s) = r$ s.t.
@@ -988,7 +1001,9 @@ To use this approach, the relevant divergence must be due to only one \textit{in
 Thus, delaying the intended robot's action is not always feasible. 
 The approach is used along with the communication solution, such that the latter is always working, and we later can select the best one for the robot. 
 However, this selection is based on an accurate \textit{policy evaluation} method, which is currently lacking in this planning scheme.
-Due to all these limitations, this solution approach is only discussed qualitatively in this section and will not appear in the formal proofs and evaluations parts. 
+Due to all these limitations, this solution approach is only discussed
+% qualitatively
+in this section and will not appear in the formal proofs and evaluations parts. 
 Nevertheless, we see it worth mentioning and discussing it briefly as it illustrates well the possible proactive behaviors the robot can be endowed with --- thanks to our contributions. 
 For more details, a pilot study is provided in the appendix.
 

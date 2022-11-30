@@ -47,6 +47,8 @@
 \floatstyle{ruled}
 \newfloat{listing}{tb}{lst}{}
 \floatname{listing}{Listing} 
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 %
 %\nocopyright
 
@@ -58,9 +60,9 @@
 % or commands are allowed.
 % Keep the /TemplateVersion tag as is
 \pdfinfo{
-/Title (Considering Theory of Mind in  Human-Aware Task Planning for a Collaborative Robot)
+/Title (Will They Know? Integrating Theory of Mind \\ in Human Aware Task Planning for Collaborative Robots)
 % /Author (Anthony Favier, Shashank Shekhar, Rachid Alami)
-/Author Paper #8284)
+/Author Authors)
 /TemplateVersion (2022.1)
 }
 
@@ -305,22 +307,34 @@ We claim that our contribution can offer a collaborative robot more clever and p
 
 We formalize situation assessment (SA) models for the participating agents. 
 They are based on the notion of {\em co-presence} and two types of \textit{action effects}: (1) facts that are inferred by an agent while performing an action, or by observing another agent acting, and (2) facts that can be observed in a state at any time.
-We upgrade the framework's existing planning scheme to utilize these models at the symbolic level as a part of the deliberation process. This allows for anticipating ambiguous situations due to estimated \textit{false} human beliefs. 
+We extend the existing framework's encoding and upgrade its planning scheme to utilize these models at the symbolic level in the deliberation process. This allows for anticipating ambiguous situations due to estimated \textit{false} human beliefs. 
 These situations are detected and avoided through different means such as: (1) minimal communication with the human to align their belief, or 
 (2) delaying a robot's action on purpose ensuring that humans could perceive the {\em key updates} rather than being communicated.
 The latter shows proactive robot behavior but it is currently limited so we just provide a pilot study and intend to investigate in the future. However, we thoroughly study only the former case showing how our planning scheme captures a pertinent evolution of individual agents' beliefs and decides if and when belief alignment is needed.
 
 
-The paper is structured as follows: 
-Related works are discussed in Section~\ref{sec:related-work}, and Section~\ref{sec:under-framework} briefly describes the underlying framework, which we extend to conceptualize our ideas. 
+% The paper is structured as follows: 
+% Related works are discussed in Section~\ref{sec:related-work}, and Section~\ref{sec:under-framework} briefly describes the underlying framework, which we extend to conceptualize our ideas. 
+% Section~\ref{sec:model-tom} describes simple ToM models by formalizing SA based on the notion of observability. 
+% Section~\ref{sec:beliefs-updates} follows this section, and discusses how agents' beliefs are updated. It first includes a description of how our SA models are used in a workflow to maintain the agent's beliefs. And then, it discusses how ambiguities in one's belief can be detected and avoided. 
+% After that, Section~\ref{sec:formal-props} provides changes in the existing problem encoding, formal properties like theorems and their proofs (the proofs omitted due to the page constraints and provided as supplementary), of the new planning scheme. 
+% Followed by Section~\ref{sec:eval} discussing empirical evaluation, and showing both qualitative and quantitative results. 
+% We then conclude the paper with a discussion.  
+
+
+
+
+The paper\footnotemark is structured as follows: 
+Related works are discussed in Section~\ref{sec:related-work}, and Section~\ref{sec:under-framework} briefly describes the underlying framework. 
 Section~\ref{sec:model-tom} describes simple ToM models by formalizing SA based on the notion of observability. 
-Section~\ref{sec:beliefs-updates} follows this section, and discusses how agents' beliefs are updated. It first includes a description of how our SA models are used in a workflow to maintain the agent's beliefs. And then, it discusses how ambiguities in one's belief can be detected and avoided. 
-After that, Section~\ref{sec:formal-props} provides changes in the existing problem encoding, formal properties like theorems and their proofs (the proofs omitted due to the page constraints and provided as supplementary), of the new planning scheme. 
+Section~\ref{sec:beliefs-updates} discusses how our proposed models are used to maintain agents' belief and to avoid ambiguities. 
+After that, Section~\ref{sec:formal-props} provides changes in the existing problem encoding, and some formal properties of the new planning scheme. 
 Followed by Section~\ref{sec:eval} discussing empirical evaluation, and showing both qualitative and quantitative results. 
 We then conclude the paper with a discussion.  
 
 %%%% END OF NEW %%%%
-(\textbf{\textit{Attached:}} benchmarks (details), code + a document with detail background, related work, proofs, and more results.)
+% (\textbf{\textit{Attached:}} benchmarks (details), code + a document with detail background, related work, proofs, and more results.)
+\footnotetext{\textbf{\textit{Attached:}} benchmarks (details), code + a document with detail background, related work, proofs, and more results.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Underlying
 %%      MOTIVATING EXAMPLE   %%
@@ -418,7 +432,7 @@ We then conclude the paper with a discussion.
 The section touches on all relevant aspects: I.e., Theory of Mind, particularly, employed in HRI, state-of-the-art planning approaches and models used in similar collaborative settings, and agents' communication, which is critical for collaborative planning. And, since humans' beliefs are modeled and exploited in our work, we also discuss relevant epistemic planning frameworks. We explain where exactly our main idea lies at their intersections.   
 
 \paragraph{Theory of Mind in HRC}
-ToM refers to the ability to ascribe distinct mental states to other people and update by reasoning about their perceptions~\cite{baron1985does}. 
+ToM refers to the ability to ascribe distinct mental states to other people and reason about their perceptions~\cite{baron1985does}. 
 % Indeed, DA's approach allows the robot to estimate the mental state of the human at runtime and adjust accordingly~\cite{devin2016implemented}. 
 
 HR Interaction (HRI) literature uses ToM in the execution of shared plans. However, the focus shown is on perspective taking --- a robot reasons about what humans can perceive followed by constructing a world from their frame of reference, and hence managing the agents' beliefs accordingly on the fly~\cite{berlin2006perspective,milliez2014framework}.
@@ -453,9 +467,9 @@ Task knowledge can be gathered offline from human psychologists and expert engin
 Hierarchical models consist of layered abstractions and are considered suitable or close to human intuitions. It helps predict humans' actions or plan predictable behaviors of the robot. 
 Such models can be learned using conjugate task graphs, and to identify the task structure an aggregation algorithm can be used~\cite{HayesS16}. 
 
-We \textit{choose} a task specification based on HTNs for representing a problem compactly. And the most appropriate framework to be extended is HATP/EHDA. 
-We \textit{adapt} its input encoding format and \textit{extend} it to integrate SA models for reasoning and planning (with our new planning scheme).
-However, we note our modeling-level SA proposals could fit in any other planning approaches framing multi-party systems having one controllable agent while can only hypothesize remaining agents' behaviors. E.g., human-centered AI.
+% We \textit{choose} a task specification based on HTNs for representing a problem compactly. And the most appropriate framework to be extended is HATP/EHDA. 
+% We \textit{adapt} its input encoding format and \textit{extend} it to integrate SA models for reasoning and planning (with our new planning scheme).
+% However, we note our modeling-level SA proposals could fit in any other planning approaches framing multi-party systems having one controllable agent while can only hypothesize remaining agents' behaviors. E.g., human-centered AI.
 
 % Although we assume that the task models of human and robot are provided as in HATP/EHDA, but will be modified to integrate the agents' SA models.    
 
@@ -986,10 +1000,10 @@ the divergence in the updated belief is made \textit{irrelevant}, or even elimin
     % (Follow Breadth-First Search) 
     % The \textit{source} is $B_{\varphi_h}^{s_i}$, and each $\textit{comm-action}_i$ changes and aligns \textit{exactly} one attribute while its updated value satisfies the ground truth. If $\textit{comm-action}_i$ is applied, generates a new belief state (following the regular state transition rules), using: $B_{\varphi_h}^{s_i,1} = \gamma(B_{\varphi_h}^{s_i}, \textit{comm-action}_i)$.
     % It continues until the first (updated) belief is selected to expand s.t. its remaining divergence is \textit{ineffective}. We then \textit{retrieve} all the actions used from the root until the current belief state.   
-    \textbf{(Breadth-First Search.)} 
+    \textit{(Breadth-First Search.)} 
     The \textit{source} is $B_{\varphi_h}^{s_i}$, and each $ca_{\varphi_r, \varphi_h}(...)$ changes, aligns \textit{exactly} one attribute and its updated value satisfies the ground truth. 
     Applying $ca_{\varphi_r, \varphi_h}(...)$ generates a new state following state transition rules, i.e., $B_{\varphi_h}^{s_i,1} = \gamma(B_{\varphi_h}^{s_i}, ca_{\varphi_r, \varphi_h}(...))$.
-    Continue until the first (updated) belief is \textit{selected} to expand s.t. its remaining divergence is ineffective. The actions used from the root until the current belief state are \textit{retrieved}.
+    Continue until the first updated belief is \textit{selected} to expand s.t. its remaining divergence is ineffective. The actions used from the root until the current belief state are \textit{retrieved}.
 \end{enumerate}
 
 % These retrieved actions are appended to the sender's plan.
@@ -1074,10 +1088,10 @@ Then, the diverging action is inserted and the nominal planning process is resum
 % Nevertheless, we see it worth mentioning and discussing it briefly as it illustrates well the possible proactive behaviors the robot can be endowed with --- thanks to our contributions. 
 % More details and preliminary results are provided in the appendix.
 
-To use this approach, the relevant divergence must be due to only one \textit{inferable} attribute and the agents must be co-present at least once after the state in which the robot starts ``delaying". 
+To use this approach, the relevant divergence must be due to only one \textit{inferable} attribute and the agents must be co-present at least once after the robot starts ``delaying". 
 Hence, this solution isn't always feasible and it has to be used along with the communication solution, which is always working.  We later select the best one for the robot. 
 However, this selection is based on an accurate \textit{policy evaluation} method, which is currently lacking in this planning scheme.
-Due to all these limitations, this solution approach is only discussed in this section and will not appear in the formal proofs and evaluations parts. 
+Due to all these limitations, this solution is only discussed in this section and will not appear in the formal proofs and evaluations parts. 
 Nevertheless, we see it worth mentioning and discussing it briefly as it illustrates well the possible proactive behaviors the robot can be endowed with --- thanks to our contributions. 
 More details and preliminary results are provided in the appendix.
 
@@ -1146,7 +1160,7 @@ Their individual proofs appear in Appendix C.
 \section{Evaluation} \label{sec:eval}
 % \textbf{** related work section suggests - no existing planner available to compare against -- adjust this statement here clearly***}
 % We discussed in related work section similar approaches but 
-From what is discussed in the related work section, we are not aware of a planning system (which is implemented) that can be used as a baseline to compare our planner, apart from the existing HATP/EHDA existing solver. We compare these two planners on three \textit{novel} planning domains.
+From what is discussed in the related work section, we are not aware of a planning system (which is implemented) that can be used as a baseline to compare our planner, apart from the HATP/EHDA existing solver. We compare these two planners on three \textit{novel} planning domains.
 
 However, before we describe the domains used in the experiments and the results to compare the existing solver and our new approach, let us make a ``high-level'' distinction between the two approaches. 
 % In principle, the old solver can handle a belief divergence only when agents start with unaligned, distinct beliefs. But, when it is not so, unlike ours, it assumes that the agents' beliefs never diverge during planning, and hence there is no way it can handle a divergence created by an agent in practice. 
@@ -1315,7 +1329,11 @@ Three boxes has been considered in the Box domain.
 
 The \textit{existing solver} always finds legal plans when dealing with aligned beliefs. But as expected, the low success rate for initially diverging beliefs (7.1\%) reflects how the \textit{existing solver} poorly handles belief divergences without specifically designed action models. Since \textit{our approach} always finds legal plans, we can say it solves a broader class of problems.
 
-Furthermore, 87.5\% of all problems initially include belief divergences. And even when starting with aligned beliefs, some divergences can be created along the planning process. Thus, we can state that more than 87.5\% of all problems involve belief divergences. However, only 69.1\% of the generated plans include communication actions. This means that \textit{our approach} communicates only when necessary, and not systematically.   
+% Furthermore, 87.5\% of all problems initially include belief divergences. And even when starting with aligned beliefs, some divergences can be created along the planning process. Thus, we can state that more than 87.5\% of all problems involve belief divergences. 
+% And even when starting with aligned beliefs, some divergences can be created along the planning process. Thus, we can state that more than 87.5\% of all problems involve belief divergences.
+% However, only 69.1\% of the generated plans include communication actions. This means that \textit{our approach} communicates only when necessary, and not systematically.   
+Furthermore, considering the initially diverging beliefs and the divergences created along the planning process, more than 87.5\% of all problems involve belief divergences. 
+However, only 69.1\% of the generated plans include communication actions. This means that \textit{our approach} communicates only when necessary, and not systematically.   
 
 \section{Discussion} 
 % \& Conclusion} 
@@ -1324,17 +1342,22 @@ Furthermore, 87.5\% of all problems initially include belief divergences. And ev
 % A new planner is described, which utilizes this better estimation of human mental state to plan for more robust and consistent human-robot joint activities such that a relevant belief divergence is tackled by explicitly modeled communication actions.  
 
 % Moreover, 
-We put an effort to make our \textit{contribution} to have a ``generic'' description. Be believe they are not limited to only the underlying framework.
+% We put an effort to make our \textit{contribution} to have a ``generic'' description. Be believe they are not limited to only the underlying framework.
+% We believe our observability and SA models are not limited to the underlying framework. So we put an effort to make our \textit{contribution} to have a ``generic" description.
+
+We believe our modeling-level SA proposals could fit in any other planning approach framing multi-party systems having one controllable agent while can only hypothesize remaining agents' behaviors  (e.g., human-centered AI). Thus, we put an effort to give our \textit{contribution} a ``generic" description.
 
 Handling SA formally is vital for robust planning, as otherwise, it can lead to problems at run-time. 
 E.g., Fig.~\ref{fig:scenarios}(A): the human knowing \textit{SaltInPot} is ambiguous. 
 Explicit reasoning on the human mental state detects ambiguous situations and removes them via communication. 
 
-Our formalism does not refute something believed by an agent through situation assessment. 
-E.g., for some $s_i \in \mathcal{S}$, if the human \textit{wrongly} believes that the pasta is in \textit{Kitchen}. The situation assessment does not help refute this, while the human is in \textit{Kitchen}. 
+Our formalism cannot refute something believed by an agent through SA, it can only assess new truth. 
+% E.g., for some $s_i \in \mathcal{S}$, 
+For instance, 
+assume the human \textit{wrongly} believes that the pasta is in \textit{Kitchen}. The SA does not help refute this, even if the human is in \textit{Kitchen}. 
 The reason is that $f_{\textit{PastaNotInKitchen}}^{s_i}(...)$ is not modeled explicitly as an attribute. 
 And hence such issues do not affect the completeness. 
-Moreover, our solver handles them as a \textit{relevant} divergence to be aligned. Followed by the human is communicated with correct updates.
+Moreover, if necessary, \textit{our approach} handles such cases as \textit{relevant} divergences and communicates to the human.
 
 % \pagebreak
 \bibliography{bib.bib}
